@@ -616,6 +616,15 @@ nav{
     border-radius:12px;
 }
 
+.sidebar-link:hover{
+    background:#f2f2f2;
+}
+
+.sidebar-link.active{
+    background:#ff6a00;
+    color:white;
+}
+
 .sidebar-icon{
     width:40px;
     min-width:40px;
@@ -631,15 +640,6 @@ nav{
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
-}
-
-.sidebar-link:hover{
-    background:#f2f2f2;
-}
-
-.sidebar-link.active{
-    background:#ff6a00;
-    color:white;
 }
 
 .sidebar-spacer{
@@ -668,3 +668,11 @@ nav{
     color:#999;
     font-size:12px;
 }
+
+/* ---------- Dashboard ---------- */
+/* ---------- Activities ---------- */
+/* ---------- Progress ---------- */
+/* ---------- Upload ---------- */
+/* ---------- AI Coach ---------- */
+/* ---------- Account ---------- */
+/* ---------- Settings ---------- */

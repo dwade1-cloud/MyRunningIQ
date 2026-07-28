@@ -259,7 +259,10 @@
             Connect your Strava account to automatically import your runs and unlock personalized insights.
         </p>
 
-        <button class="tutorial-strava-button">
+        <button 
+            class="tutorial-strava-button"
+            id="connect-strava"
+        >
             Connect Strava
         </button>
 
@@ -349,7 +352,7 @@ function validateCurrentPage(){
 
     });
 
-    nextBtn.disabled = !valid;
+    nextBtn.disabled = false;
 
 }
 
@@ -570,5 +573,6 @@ updateTutorial();
 
 </script>
 
+<script type="module" src="js/strava.js"></script>
 </body>
 </html>

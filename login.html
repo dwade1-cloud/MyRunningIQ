@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | MyRunningIQ</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-body">
+
+    <div class="login-container">
+
+        <img src="images/LogoBlack.png" alt="MyRunningIQ Logo" class="login-logo">
+
+        <h1 class="login-title">Welcome Back</h1>
+
+        <p class="login-subtitle">
+            Log in to continue your training.
+        </p>
+
+        <form class="login-form" id="login-form">
+
+            <input
+                type="email"
+                placeholder="Email Address"
+                class="login-input"
+                id="email"
+            >
+
+            <input
+                type="password"
+                placeholder="Password"
+                class="login-input"
+                id="password"
+            >
+
+            <div class="login-options">
+                <div class="login-checkbox-row">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+
+                <a href="#" class="login-forgot-password">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <button class="login-button" type="submit">
+                Log In
+            </button>
+
+        </form>
+
+        <p class="login-signup-text">
+            Don't have an account?
+            <a href="signup.html">Create One</a>
+        </p>
+
+    </div>
+
+    <script type="module" src="js/login.js"></script>
+
+</body>
+</html>

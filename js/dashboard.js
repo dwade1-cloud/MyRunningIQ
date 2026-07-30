@@ -827,25 +827,80 @@ async function loadWeeklyTargets(
     }
 }
 
+/* =========================================================
+   STRAVA AUTO SYNC
+   ========================================================= */
+async function syncStravaActivities(user) {
+    try {
+        console.log(
+            "Starting automatic Strava sync..."
+        );
+
+        const idToken =
+            await user.getIdToken();
+
+        const response = await fetch(
+            "https://us-central1-myrunningiq.cloudfunctions.net/" +
+            "getStravaActivities",
+            {
+                headers: {
+                    "Authorization":
+                        `Bearer ${idToken}`
+                }
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            console.error(
+                "Automatic Strava sync failed:",
+                data
+            );
+
+            return false;
+        }
+
+        console.log(
+            "Automatic Strava sync complete:",
+            data
+        );
+
+        return true;
+    } catch (error) {
+        console.error(
+            "Automatic Strava sync error:",
+            error
+        );
+
+        return false;
+    }
+}
 
 /* =========================================================
    DASHBOARD STARTUP
    ========================================================= */
-
 onAuthStateChanged(
     auth,
     async (user) => {
         if (!user) {
             window.location.href =
                 "login.html";
-
             return;
         }
 
         try {
             /*
+             * Sync Strava first so Firestore
+             * contains the newest activities
+             * before the dashboard reads it.
+             */
+            await syncStravaActivities(user);
+
+            /*
              * Load the user's global definition
-             * of a training week first.
+             * of a training week.
              */
             const weekStart =
                 await getWeekStart(user);
@@ -854,7 +909,6 @@ onAuthStateChanged(
                 "WEEK START:",
                 weekStart
             );
-
 
             /*
              * Latest run and weekly activity
@@ -872,7 +926,6 @@ onAuthStateChanged(
             const weeklyStats =
                 results[0];
 
-
             /*
              * Targets depend on weeklyStats,
              * so load these afterward.
@@ -884,7 +937,6 @@ onAuthStateChanged(
                     weeklyStats
                 );
             }
-
         } catch (error) {
             console.error(
                 "Dashboard startup error:",

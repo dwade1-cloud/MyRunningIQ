@@ -10,6 +10,104 @@ const db = getFirestore();
 setGlobalOptions({maxInstances: 10});
 
 /**
+ * Returns a valid Strava access token.
+ * Refreshes and stores the token when needed.
+ *
+ * @param {string} uid Firebase user ID.
+ * @param {Object} stravaData Stored Strava token data.
+ * @return {Promise<string>} Valid Strava access token.
+ */
+async function getValidStravaAccessToken(
+    uid,
+    stravaData,
+) {
+  const currentTimeSeconds =
+      Math.floor(Date.now() / 1000);
+
+  const refreshBufferSeconds = 300;
+
+  const tokenStillValid =
+      stravaData.expiresAt &&
+      stravaData.expiresAt >
+      currentTimeSeconds + refreshBufferSeconds;
+
+  if (tokenStillValid) {
+    console.log(
+        "Existing Strava access token is valid.",
+    );
+
+    return stravaData.accessToken;
+  }
+
+  console.log(
+      "Strava access token needs refreshing.",
+  );
+
+  if (!stravaData.refreshToken) {
+    throw new Error(
+        "No Strava refresh token is stored.",
+    );
+  }
+
+  const refreshResponse = await fetch(
+      "https://www.strava.com/oauth/token",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          client_id: "268391",
+          client_secret:
+              process.env.STRAVA_CLIENT_SECRET,
+          grant_type: "refresh_token",
+          refresh_token:
+              stravaData.refreshToken,
+        }),
+      },
+  );
+
+  const refreshData =
+      await refreshResponse.json();
+
+  if (!refreshResponse.ok) {
+    console.error(
+        "Strava token refresh failed:",
+        refreshData,
+    );
+
+    throw new Error(
+        "Unable to refresh Strava access token.",
+    );
+  }
+
+  await db
+      .collection("users")
+      .doc(uid)
+      .collection("private")
+      .doc("strava")
+      .set(
+          {
+            accessToken:
+                refreshData.access_token,
+            refreshToken:
+                refreshData.refresh_token,
+            expiresAt:
+                refreshData.expires_at,
+          },
+          {
+            merge: true,
+          },
+      );
+
+  console.log(
+      "Strava access token refreshed.",
+  );
+
+  return refreshData.access_token;
+}
+
+/**
  * Preserves valid values including zero, otherwise returns null.
  * @param {*} value Value to check.
  * @return {*} Original value or null.
@@ -115,6 +213,7 @@ exports.stravaCallback = onRequest(
 exports.getStravaActivities = onRequest(
     {
       cors: true,
+      secrets: ["STRAVA_CLIENT_SECRET"],
     },
     async (request, response) => {
       try {
@@ -146,20 +245,74 @@ exports.getStravaActivities = onRequest(
         }
 
         const stravaData = stravaDoc.data();
+        const syncCooldownSeconds = 120;
 
+        if (stravaData.lastSyncedAt) {
+          const lastSyncSeconds =
+      Math.floor(
+          stravaData.lastSyncedAt
+              .toDate()
+              .getTime() / 1000,
+      );
+
+          const currentTimeSeconds =
+      Math.floor(Date.now() / 1000);
+
+          const secondsSinceLastSync =
+      currentTimeSeconds - lastSyncSeconds;
+
+          if (
+            secondsSinceLastSync <
+    syncCooldownSeconds
+          ) {
+            console.log(
+                "Skipping Strava sync due to cooldown.",
+            );
+
+            return response.status(200).json({
+              success: true,
+              skipped: true,
+              reason: "cooldown",
+              secondsUntilNextSync:
+          syncCooldownSeconds -
+          secondsSinceLastSync,
+              activityCount: 0,
+              activitiesImported: 0,
+            });
+          }
+        }
+        const accessToken =
+          await getValidStravaAccessToken(uid, stravaData);
         const activities = [];
+        const lastSyncedAt =
+          stravaData.lastSyncedAt || null;
+
+        let afterTimestamp = null;
+
+        if (lastSyncedAt) {
+          afterTimestamp =
+            Math.floor(lastSyncedAt.toDate().getTime() / 1000) - 300;
+        }
         const perPage = 100;
         const maxPages = 10;
         let page = 1;
         let keepFetching = true;
 
         while (keepFetching) {
-          const activitiesResponse = await fetch(
+          let activitiesUrl =
               `https://www.strava.com/api/v3/athlete/activities` +
-            `?per_page=${perPage}&page=${page}`,
+              `?per_page=${perPage}&page=${page}`;
+
+          if (afterTimestamp) {
+            activitiesUrl +=
+              `&after=${afterTimestamp}`;
+          }
+
+          const activitiesResponse = await fetch(
+              activitiesUrl,
               {
                 headers: {
-                  "Authorization": `Bearer ${stravaData.accessToken}`,
+                  "Authorization": `Bearer ${accessToken}`,
                 },
               },
           );
@@ -249,6 +402,20 @@ exports.getStravaActivities = onRequest(
 
           await batch.commit();
         }
+
+        await db
+            .collection("users")
+            .doc(uid)
+            .collection("private")
+            .doc("strava")
+            .set(
+                {
+                  lastSyncedAt: new Date(),
+                },
+                {
+                  merge: true,
+                },
+            );
 
         return response.status(200).json({
           success: true,

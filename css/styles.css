@@ -1,5 +1,4 @@
-/* ---------- Global ---------- */
-
+/* #region Global */
 *{
     margin:0;
     padding:0;
@@ -33,9 +32,8 @@ nav{
     align-items:center;
     padding:30px 60px;
 }
-
-/* ---------- Landing Page ---------- */
-
+/* #endregion */
+/* #region Landing Page */
 .landing-body{
     background-image:
         linear-gradient(rgba(0,0,0,.50), rgba(0,0,0,.50)),
@@ -127,9 +125,8 @@ nav{
 .landing-cta-button:hover{
     transform:scale(1.05);
 }
-
-/* ---------- Signup Page ---------- */
-
+/* #endregion */
+/* #region Signup Page */
 .signup-body{
     margin:0;
     min-height:100vh;
@@ -237,9 +234,8 @@ nav{
 .signup-login-text a:hover{
     text-decoration:underline;
 }
-
-/* ---------- Login Page ---------- */
-
+/* #endregion */
+/* #region Login Page */
 .login-body{
     margin:0;
     min-height:100vh;
@@ -365,9 +361,8 @@ nav{
 .login-signup-text a:hover{
     text-decoration:underline;
 }
-
-/* ---------- Tutorial ---------- */
-
+/* #endregion */
+/* #region Tutorial */  
 .tutorial-body{
     margin:0;
     min-height:100vh;
@@ -532,7 +527,7 @@ nav{
 }
 
 .tutorial-height-row .tutorial-input{
-    margin-bottom:17;
+    margin-bottom:17px;
 }
 
 .tutorial-strava-button{
@@ -561,9 +556,8 @@ nav{
     text-align:center;
     line-height:1.5;
 }
-
-/* ---------- Sidebar ---------- */
-
+/* #endregion */
+/* #region Sidebar */
 .sidebar{
     position:fixed;
     top:0;
@@ -668,9 +662,8 @@ nav{
     color:#999;
     font-size:12px;
 }
-
-/* ---------- Dashboard ---------- */
-
+/* #endregion */
+/* #region Dashboard */
 .dashboard-main {
     margin-left: calc(190px + 9vw);
     width: calc(100% - (190px + 9vw));
@@ -1101,88 +1094,18 @@ nav{
     font-size: 35px;
 }
 
-.dashboard-lower-grid,
-.dashboard-bottom-grid {
+.dashboard-lower-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
     margin-top: 18px;
+    align-items: stretch;
 }
 
-.activity-list {
-    display: flex;
-    flex-direction: column;
-}
-
-.activity-row {
-    display: grid;
-    grid-template-columns: minmax(160px, 1.6fr) repeat(3, 0.7fr);
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid #eeeeee;
-}
-
-.activity-row:last-child {
-    border-bottom: none;
-}
-
-.activity-left {
-    display: flex;
-    align-items: center;
-    gap: 11px;
+.dashboard-lower-grid > .dashboard-card {
     min-width: 0;
-}
-
-.activity-icon {
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #fff0e5;
-    color: #f47b20;
-    font-size: 10px;
-    font-weight: 800;
-}
-
-.activity-left strong,
-.activity-left span {
-    display: block;
-}
-
-.activity-left strong {
-    overflow: hidden;
-    font-size: 15px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.activity-left span {
-    margin-top: 3px;
-    color: #999;
-    font-size: 13px;
-}
-
-.activity-stat strong,
-.activity-stat span {
-    display: block;
-}
-
-.activity-stat strong {
-    font-size: 15px;
-}
-
-.activity-stat span {
-    margin-top: 3px;
-    color: #999;
-    font-size: 13px;
-}
-
-.activity-hr strong {
-    color: #e06045;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .mileage-chart {
@@ -1237,42 +1160,6 @@ nav{
     margin-top: 17px;
     color: #777;
     font-size: 15px;
-}
-
-.current-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.current-stat {
-    padding: 7px 16px;
-    border-right: 1px solid #eeeeee;
-}
-
-.current-stat:first-child {
-    padding-left: 0;
-}
-
-.current-stat:last-child {
-    border-right: none;
-}
-
-.current-stat-value {
-    font-size: 24px;
-    font-weight: 800;
-}
-
-.current-stat-unit {
-    margin-left: 3px;
-    color: #777;
-    font-size: 13px;
-}
-
-.current-stat-label {
-    display: block;
-    margin-top: 6px;
-    color: #999;
-    font-size: 13px;
 }
 
 .race-goals {
@@ -1339,12 +1226,12 @@ nav{
     .dashboard-top-grid {
         grid-template-columns: 1fr;
     }
+}
 
-    .dashboard-lower-grid,
-    .dashboard-bottom-grid {
+@media (max-width: 900px) {
+    .dashboard-lower-grid {
         grid-template-columns: 1fr;
     }
-
 }
 
 @media (max-width: 800px) {
@@ -1380,19 +1267,6 @@ nav{
     .latest-run-primary,
     .latest-run-secondary {
         grid-template-columns: repeat(3, 1fr);
-    }
-
-    .current-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 20px;
-    }
-
-    .current-stat:nth-child(2) {
-        border-right: none;
-    }
-
-    .current-stat:nth-child(3) {
-        padding-left: 0;
     }
 
     .race-goals {
@@ -1457,8 +1331,8 @@ nav{
         gap: 8px;
     }
 }
-/* ---------- Strava Loading ---------- */
-
+/* #endregion */
+/* #region Strava Loading */
 .strava-loading-body {
     margin: 0;
     min-height: 100vh;
@@ -1510,55 +1384,39 @@ nav{
         transform: rotate(360deg);
     }
 }
-/* ---------- Activities ---------- */
-/* ---------- Progress ---------- */
-/* ---------- Weekly Targets ---------- */
-/* =========================================================
-   WEEKLY TARGETS PAGE
-   ========================================================= */
+/* #endregion */
+/* #region Activities */
+/* #endregion */
+/* #region Weekly Targets */
 
 .targets-page {
     margin: 0;
     min-height: 100vh;
-
     background: #f7f7f8;
     color: #181818;
 }
 
 .targets-main {
     width: min(760px, calc(100% - 40px));
-
     margin: 0 auto;
     padding: 40px 0 70px;
-
     box-sizing: border-box;
 }
-
-
-/* BACK BUTTON */
 
 .targets-back {
     display: inline-flex;
     align-items: center;
-
     margin-bottom: 35px;
-
     color: #666;
-
     font-size: 12px;
     font-weight: 700;
-
     text-decoration: none;
-
     transition: color 0.15s ease;
 }
 
 .targets-back:hover {
     color: #f47b20;
 }
-
-
-/* HEADER */
 
 .targets-header {
     margin-bottom: 25px;
@@ -1567,9 +1425,7 @@ nav{
 .targets-eyebrow,
 .targets-card-eyebrow {
     margin: 0 0 6px;
-
     color: #f47b20;
-
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.2px;
@@ -1577,50 +1433,34 @@ nav{
 
 .targets-header h1 {
     margin: 0;
-
     font-size: 32px;
     font-weight: 750;
 }
 
 .targets-header > p:last-child {
     margin: 8px 0 0;
-
     color: #777;
-
     font-size: 13px;
 }
-
-/* =========================================================
-   WEEK SELECTOR
-   ========================================================= */
 
 .week-selector {
     display: grid;
     grid-template-columns: repeat(11, 1fr);
-
     gap: 7px;
-
     margin-bottom: 10px;
 }
 
 .week-bubble {
     max-width: 40px;
     height: 34px;
-
     padding: 0 5px;
-
     border: 1px solid #e2e2e2;
     border-radius: 20px;
-
     background: #ffffff;
-
     color: #777;
-
     font-size: 10px;
     font-weight: 700;
-
     cursor: pointer;
-
     transition:
         background 0.15s ease,
         border-color 0.15s ease,
@@ -1642,51 +1482,36 @@ nav{
 }
 
 @media (max-width: 650px) {
-
     .week-selector {
         display: flex;
-
         overflow-x: auto;
-
         padding-bottom: 5px;
     }
-
     .week-bubble {
         flex: 0 0 55px;
     }
-
 }
-
-/* =========================================================
-   WEEK CONTROLS
-   ========================================================= */
 
 .week-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 25px;
-
     margin-bottom: 18px;
     padding: 18px 20px;
-
     border: 1px solid #e8e8e8;
     border-radius: 14px;
-
     background: #ffffff;
 }
 
 .current-week-display {
     display: flex;
     flex-direction: column;
-
     gap: 4px;
 }
 
 .week-label {
     color: #999;
-
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -1700,92 +1525,66 @@ nav{
 .week-start-setting {
     display: flex;
     flex-direction: column;
-
     gap: 6px;
 }
 
 .week-start-setting label {
     color: #777;
-
     font-size: 9px;
     font-weight: 700;
 }
 
 .week-start-setting select {
     min-width: 130px;
-
     padding: 8px 30px 8px 10px;
-
     border: 1px solid #dddddd;
     border-radius: 7px;
-
     background: #ffffff;
-
     color: #333;
-
     font-size: 11px;
-
     outline: none;
     cursor: pointer;
 }
 
 .week-start-setting select:focus {
     border-color: #f47b20;
-
     box-shadow: 0 0 0 3px rgba(244, 123, 32, 0.08);
 }
 
-
-/* =========================================================
-   TARGET CARD
-   ========================================================= */
-
 .targets-card {
     padding: 26px;
-
     border: 1px solid #e8e8e8;
     border-radius: 16px;
-
     background: #ffffff;
-
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.035);
 }
 
 .targets-card-header {
     padding-bottom: 19px;
     margin-bottom: 23px;
-
     border-bottom: 1px solid #eeeeee;
 }
 
 .targets-card-header h2 {
     margin: 0;
-
     font-size: 18px;
 }
 
-
-/* INPUT GRID */
-
 .targets-grid {
     display: grid;
-
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
     gap: 20px;
 }
 
 .target-input-group {
     display: flex;
     flex-direction: column;
-
     gap: 7px;
 }
 
 .target-input-group label,
 .target-note-group label {
     color: #555;
-
     font-size: 11px;
     font-weight: 700;
 }
@@ -1793,81 +1592,55 @@ nav{
 .target-input-group > input,
 .target-note-group textarea {
     width: 100%;
-
     padding: 11px 12px;
-
     box-sizing: border-box;
-
     border: 1px solid #dddddd;
     border-radius: 8px;
-
     background: #ffffff;
-
     color: #181818;
-
     font: inherit;
     font-size: 13px;
-
     outline: none;
 }
 
 .target-input-group > input:focus,
 .target-note-group textarea:focus {
     border-color: #f47b20;
-
     box-shadow: 0 0 0 3px rgba(244, 123, 32, 0.08);
 }
-
-
-/* INPUT + UNIT */
 
 .target-input-wrapper {
     display: flex;
     align-items: center;
-
     overflow: hidden;
-
     border: 1px solid #dddddd;
     border-radius: 8px;
-
     background: #ffffff;
 }
 
 .target-input-wrapper:focus-within {
     border-color: #f47b20;
-
     box-shadow: 0 0 0 3px rgba(244, 123, 32, 0.08);
 }
 
 .target-input-wrapper input {
     flex: 1;
     min-width: 0;
-
     padding: 11px 12px;
-
     border: none;
-
     background: transparent;
-
     color: #181818;
-
     font: inherit;
     font-size: 13px;
-
     outline: none;
 }
 
 .target-input-wrapper span {
     padding-right: 12px;
-
     color: #999;
-
     font-size: 11px;
     font-weight: 700;
 }
-
-
-/* NOTE */
 
 .target-note-group {
     margin-top: 22px;
@@ -1875,60 +1648,43 @@ nav{
 
 .target-note-group label {
     display: block;
-
     margin-bottom: 7px;
 }
 
 .target-note-group label span {
     margin-left: 5px;
-
     color: #aaa;
-
     font-weight: 400;
 }
 
 .target-note-group textarea {
     min-height: 90px;
-
     resize: vertical;
 }
-
-
-/* SAVE AREA */
 
 .targets-actions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     gap: 15px;
-
     margin-top: 22px;
 }
 
 #targets-save-message {
     margin: 0;
-
     color: #777;
-
     font-size: 11px;
 }
 
 .targets-save-button {
     padding: 11px 22px;
-
     border: none;
     border-radius: 8px;
-
     background: #f47b20;
-
     color: #ffffff;
-
     font-size: 12px;
     font-weight: 700;
-
     cursor: pointer;
-
     transition:
         background 0.15s ease,
         transform 0.15s ease;
@@ -1936,43 +1692,37 @@ nav{
 
 .targets-save-button:hover {
     background: #df6814;
-
     transform: translateY(-1px);
 }
 
-
-/* MOBILE */
-
 @media (max-width: 650px) {
-
     .targets-main {
         width: calc(100% - 30px);
-
         padding-top: 25px;
     }
-
     .targets-grid {
         grid-template-columns: 1fr;
     }
-
     .week-controls {
         align-items: flex-start;
         flex-direction: column;
     }
-
     .week-start-setting {
         width: 100%;
     }
-
     .week-start-setting select {
         width: 100%;
     }
-
     .targets-card {
         padding: 20px;
     }
-
-}s
-/* ---------- AI Coach ---------- */
-/* ---------- Account ---------- */
-/* ---------- Settings ---------- */
+}
+/* #endregion */
+/* #region Progress */
+/* #endregion */
+/* #region AI Coach */
+/* #endregion */
+/* #region Account */
+/* #endregion */
+/* #region Settings */
+/* #endregion */

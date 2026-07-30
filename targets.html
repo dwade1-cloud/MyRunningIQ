@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Weekly Targets | MyRunningIQ</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="targets-page">
+
+    <main class="targets-main">
+
+        <!-- BACK BUTTON -->
+        <a href="dashboard.html" class="targets-back">
+            ← Back to Dashboard
+        </a>
+
+
+        <!-- PAGE HEADER -->
+        <section class="targets-header">
+
+            <p class="targets-eyebrow">
+                WEEKLY PLAN
+            </p>
+
+            <h1>Weekly Targets</h1>
+
+            <p>
+                Set a few simple goals for your training week.
+            </p>
+
+        </section>
+
+        <div class="week-selector" id="week-selector">
+
+            <button
+                type="button"
+                class="week-bubble active"
+                data-week-offset="0"
+            >
+                Current
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="1"
+            >
+                1
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="2"
+            >
+                2
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                    data-week-offset="3"
+            >
+                3
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="4"
+            >
+                4
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="5"
+            >
+                5
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="6"
+            >
+                6
+            </button>
+
+                <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="7"
+        >
+                7
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="8"
+            >
+                8
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="9"
+            >
+                9
+            </button>
+
+            <button
+                type="button"
+                class="week-bubble"
+                data-week-offset="10"
+            >
+                10
+            </button>
+
+        </div>
+
+        <!-- WEEK CONTROLS -->
+        <section class="week-controls">
+
+            <div class="current-week-display">
+
+                <span class="week-label">
+                    THIS WEEK
+                </span>
+
+                <strong id="targets-week-range">
+                    7/27 – 8/2
+                </strong>
+
+            </div>
+
+
+            <div class="week-start-setting">
+
+                <label for="week-start">
+                    Preferred start of week
+                </label>
+
+                <select id="week-start">
+                    <option value="monday">
+                        Monday
+                    </option>
+
+                    <option value="sunday">
+                        Sunday
+                    </option>
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- TARGET CARD -->
+        <section class="targets-card">
+
+            <div class="targets-card-header">
+
+                <div>
+                    <p class="targets-card-eyebrow">
+                        TRAINING GOALS
+                    </p>
+
+                    <h2>Targets for This Week</h2>
+                </div>
+
+            </div>
+
+
+            <div class="targets-grid">
+
+                <!-- MILEAGE -->
+                <div class="target-input-group">
+
+                    <label for="target-mileage">
+                        Target Mileage
+                    </label>
+
+                    <div class="target-input-wrapper">
+
+                        <input
+                            type="number"
+                            id="target-mileage"
+                            min="0"
+                            step="0.5"
+                        >
+
+                        <span>mi</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RUNS -->
+                <div class="target-input-group">
+
+                    <label for="target-runs">
+                        Target Runs
+                    </label>
+
+                    <input
+                        type="number"
+                        id="target-runs"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <!-- RACES -->
+                <div class="target-input-group">
+
+                    <label for="target-races">
+                        Races This Week
+                    </label>
+
+                    <input
+                        type="number"
+                        id="target-races"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+
+                <!-- LONG RUN -->
+                <div class="target-input-group">
+
+                    <label for="target-long-run">
+                        Long Run Target
+                    </label>
+
+                    <div class="target-input-wrapper">
+
+                        <input
+                            type="number"
+                            id="target-long-run"
+                            min="0"
+                            step="0.5"
+                        >
+
+                        <span>mi</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HARD SESSIONS -->
+                <div class="target-input-group">
+
+                    <label for="target-hard-sessions">
+                        Hard Sessions
+                    </label>
+
+                    <input
+                        type="number"
+                        id="target-hard-sessions"
+                        min="0"
+                        step="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTE -->
+            <div class="target-note-group">
+
+                <label for="target-note">
+                    Weekly Note
+                    <span>Optional</span>
+                </label>
+
+                <textarea
+                    id="target-note"
+                    maxlength="250"
+                    placeholder="Anything important about this week..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- SAVE -->
+            <div class="targets-actions">
+
+                <p id="targets-save-message"></p>
+
+                <button
+                    type="button"
+                    class="targets-save-button"
+                    id="save-targets"
+                >
+                    Save Targets
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script type="module" src="js/targets.js"></script>
+
+</body>
+
+</html>

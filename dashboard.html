@@ -40,9 +40,9 @@
             <span class="sidebar-text">Progress</span>
         </a>
 
-        <a href="upload.html" class="sidebar-link">
+        <a href="targets.html" class="sidebar-link">
             <span class="sidebar-icon">➕</span>
-            <span class="sidebar-text">Upload Activity</span>
+            <span class="sidebar-text">Weekly Goals</span>
         </a>
 
         <a href="coach.html" class="sidebar-link">
@@ -81,6 +81,670 @@
     </div>
 
 </div>
+
+<main class="dashboard-main">
+
+    <!-- DASHBOARD HEADER -->
+    <section class="dashboard-header">
+        <div>
+            <p class="dashboard-eyebrow">DASHBOARD</p>
+            <h1>Welcome back, <span id="dashboard-user-name">Runner</span></h1>
+            <p class="dashboard-subtitle">
+                Here's a look at your training.
+            </p>
+        </div>
+
+        <div class="dashboard-sync">
+            <span class="sync-dot"></span>
+            <span>Strava connected</span>
+        </div>
+    </section>
+
+
+    <!-- TOP 3 CARDS -->
+    <section class="dashboard-top-grid">
+
+        <!-- WEEKLY SNAPSHOT -->
+        <article class="dashboard-card weekly-snapshot">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">WEEKLY SNAPSHOT</p>
+                    <h2>This Week</h2>
+                </div>
+
+                <span class="card-date" id="week-date-range">
+                    Current week
+                </span>
+            </div>
+
+            <div class="weekly-mileage-main">
+                <span class="big-number" id="weekly-mileage">24.6</span>
+                <span class="big-unit">mi</span>
+            </div>
+
+            <p class="metric-description">Total mileage this week</p>
+
+            <div class="weekly-stats-grid">
+
+                <div class="mini-stat">
+                    <span class="mini-stat-value" id="weekly-runs">5</span>
+                    <span class="mini-stat-label">Runs</span>
+                </div>
+
+                <div class="mini-stat">
+                    <span class="mini-stat-value" id="weekly-time">3h 14m</span>
+                    <span class="mini-stat-label">Total Time</span>
+                </div>
+
+                <div class="mini-stat">
+                    <span class="mini-stat-value" id="easy-mileage-percent">72%</span>
+                    <span class="mini-stat-label">Easy Miles</span>
+                </div>
+
+                <div class="mini-stat">
+                    <span class="mini-stat-value" id="hard-mileage-percent">28%</span>
+                    <span class="mini-stat-label">Hard Miles</span>
+                </div>
+
+            </div>
+
+            <div class="weekly-progress">
+
+                <div class="progress-heading">
+                    <span>Weekly Mileage Goal</span>
+                    <span>
+                        <strong id="weekly-progress-current">24.6</strong>
+                        /
+                        <span id="weekly-progress-target">30</span> mi
+                    </span>
+                </div>
+
+                <div class="progress-track">
+                    <div
+                        class="progress-fill"
+                        id="weekly-progress-bar"
+                        style="width: 82%;">
+                    </div>
+                </div>
+
+                <div class="progress-footer">
+                    <span id="weekly-progress-percent">82% complete</span>
+                    <span id="weekly-mileage-remaining">5.4 mi remaining</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- LATEST RUN -->
+        <article class="dashboard-card latest-run-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">LATEST ACTIVITY</p>
+                    <h2 id="latest-run-name">Morning Trail Run</h2>
+                </div>
+
+                <div class="run-icon">
+                    &#10140;
+                </div>
+            </div>
+
+            <p class="latest-run-date" id="latest-run-date">
+                Today • 7:14 AM
+            </p>
+
+            <div class="latest-run-primary">
+
+                <div>
+                    <span class="run-primary-value" id="latest-distance">
+                        4.21
+                    </span>
+                    <span class="run-primary-unit">mi</span>
+                    <span class="run-primary-label">Distance</span>
+                </div>
+
+                <div>
+                    <span class="run-primary-value" id="latest-pace">
+                        8:02
+                    </span>
+                    <span class="run-primary-unit">/mi</span>
+                    <span class="run-primary-label">Avg Pace</span>
+                </div>
+
+                <div>
+                    <span class="run-primary-value" id="latest-time">
+                        33:47
+                    </span>
+                    <span class="run-primary-label">Time</span>
+                </div>
+
+            </div>
+
+            <div class="latest-run-secondary">
+
+                <div class="run-detail">
+                    <span class="run-detail-value" id="latest-hr">
+                        175
+                    </span>
+                    <span class="run-detail-unit">bpm</span>
+                    <span class="run-detail-label">Avg HR</span>
+                </div>
+
+                <div class="run-detail">
+                    <span class="run-detail-value" id="latest-elevation">
+                        420
+                    </span>
+                    <span class="run-detail-unit">ft</span>
+                    <span class="run-detail-label">Elevation</span>
+                </div>
+
+                <div class="run-detail">
+                    <span class="run-detail-value" id="latest-cadence">
+                        166
+                    </span>
+                    <span class="run-detail-unit">spm</span>
+                    <span class="run-detail-label">Cadence</span>
+                </div>
+
+            </div>
+
+            <button class="orange-button" id="view-latest-activity">
+                View Activity
+                <span>→</span>
+            </button>
+
+        </article>
+
+
+        <!-- WEEKLY TARGETS -->
+        <article class="dashboard-card weekly-targets-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">WEEKLY TARGETS</p>
+                    <h2>Stay on Track</h2>
+                </div>
+            </div>
+
+            <div class="target-item">
+
+                <div class="target-top">
+                    <div>
+                        <span class="target-name">Mileage</span>
+                        <span class="target-description">
+                            Weekly distance
+                        </span>
+                    </div>
+
+                    <strong>
+                        <span id="target-mileage-current">24.6</span>
+                        /
+                        <span id="target-mileage-goal">30</span> mi
+                    </strong>
+                </div>
+
+                <div class="target-track">
+                    <div
+                        class="target-fill"
+                        style="width: 82%;">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="target-item">
+
+                <div class="target-top">
+                    <div>
+                        <span class="target-name">Run Frequency</span>
+                        <span class="target-description">
+                            Runs this week
+                        </span>
+                    </div>
+
+                    <strong>
+                        <span id="target-runs-current">5</span>
+                        /
+                        <span id="target-runs-goal">6</span>
+                    </strong>
+                </div>
+
+                <div class="target-track">
+                    <div
+                        class="target-fill"
+                        style="width: 83%;">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="target-item">
+
+                <div class="target-top">
+                    <div>
+                        <span class="target-name">Easy Running</span>
+                        <span class="target-description">
+                            Keep most mileage easy
+                        </span>
+                    </div>
+
+                    <strong id="target-easy-percent">72%</strong>
+                </div>
+
+                <div class="target-track">
+                    <div
+                        class="target-fill"
+                        style="width: 72%;">
+                    </div>
+                </div>
+
+            </div>
+
+            <a href="goals.html" class="text-link">
+                Edit weekly targets →
+            </a>
+
+        </article>
+
+    </section>
+
+
+    <!-- AI COACH -->
+    <section class="dashboard-section ai-section">
+
+        <div class="section-heading">
+            <div>
+                <p class="card-label">MYRUNNINGIQ AI</p>
+                <h2>AI Coach</h2>
+            </div>
+
+            <p>
+                Turn your training data into useful feedback.
+            </p>
+        </div>
+
+        <div class="ai-card-grid">
+
+            <button class="ai-action-card">
+
+                <div class="ai-icon">
+                    ✦
+                </div>
+
+                <div class="ai-card-text">
+                    <h3>Analyze My Training</h3>
+                    <p>
+                        Get an AI analysis of your recent training,
+                        workload and progress.
+                    </p>
+                </div>
+
+                <span class="ai-arrow">→</span>
+
+            </button>
+
+
+            <button class="ai-action-card">
+
+                <div class="ai-icon">
+                    ◌
+                </div>
+
+                <div class="ai-card-text">
+                    <h3>Ask My Coach</h3>
+                    <p>
+                        Ask questions about your runs, goals and
+                        training history.
+                    </p>
+                </div>
+
+                <span class="ai-arrow">→</span>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RECENT ACTIVITY + MILEAGE CHART -->
+    <section class="dashboard-lower-grid">
+
+        <!-- RECENT ACTIVITIES -->
+        <article class="dashboard-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">TRAINING</p>
+                    <h2>Recent Activities</h2>
+                </div>
+
+                <a href="activities.html" class="text-link">
+                    View all →
+                </a>
+            </div>
+
+
+            <div class="activity-list" id="recent-activities-list">
+
+                <!-- TEMPORARY PLACEHOLDER ROW -->
+                <div class="activity-row">
+
+                    <div class="activity-left">
+
+                        <div class="activity-icon">
+                            R
+                        </div>
+
+                        <div>
+                            <strong>Morning Trail Run</strong>
+                            <span>Today</span>
+                        </div>
+
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>4.21 mi</strong>
+                        <span>Distance</span>
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>8:02</strong>
+                        <span>Pace</span>
+                    </div>
+
+                    <div class="activity-stat activity-hr">
+                        <strong>175</strong>
+                        <span>Avg HR</span>
+                    </div>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-left">
+
+                        <div class="activity-icon">
+                            R
+                        </div>
+
+                        <div>
+                            <strong>Easy Run</strong>
+                            <span>Yesterday</span>
+                        </div>
+
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>5.02 mi</strong>
+                        <span>Distance</span>
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>8:14</strong>
+                        <span>Pace</span>
+                    </div>
+
+                    <div class="activity-stat activity-hr">
+                        <strong>163</strong>
+                        <span>Avg HR</span>
+                    </div>
+
+                </div>
+
+
+                <div class="activity-row">
+
+                    <div class="activity-left">
+
+                        <div class="activity-icon">
+                            R
+                        </div>
+
+                        <div>
+                            <strong>Threshold Run</strong>
+                            <span>3 days ago</span>
+                        </div>
+
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>6.10 mi</strong>
+                        <span>Distance</span>
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>7:18</strong>
+                        <span>Pace</span>
+                    </div>
+
+                    <div class="activity-stat activity-hr">
+                        <strong>174</strong>
+                        <span>Avg HR</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- WEEKLY MILEAGE -->
+        <article class="dashboard-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">PROGRESS</p>
+                    <h2>Weekly Mileage</h2>
+                </div>
+
+                <span class="card-date">Last 8 weeks</span>
+            </div>
+
+            <div class="mileage-chart" id="weekly-mileage-chart">
+
+                <div class="chart-column">
+                    <span class="chart-value">18</span>
+                    <div class="chart-bar" style="height: 42%;"></div>
+                    <span class="chart-label">W1</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">22</span>
+                    <div class="chart-bar" style="height: 52%;"></div>
+                    <span class="chart-label">W2</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">25</span>
+                    <div class="chart-bar" style="height: 59%;"></div>
+                    <span class="chart-label">W3</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">28</span>
+                    <div class="chart-bar" style="height: 66%;"></div>
+                    <span class="chart-label">W4</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">31</span>
+                    <div class="chart-bar" style="height: 74%;"></div>
+                    <span class="chart-label">W5</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">27</span>
+                    <div class="chart-bar" style="height: 64%;"></div>
+                    <span class="chart-label">W6</span>
+                </div>
+
+                <div class="chart-column">
+                    <span class="chart-value">29</span>
+                    <div class="chart-bar" style="height: 69%;"></div>
+                    <span class="chart-label">W7</span>
+                </div>
+
+                <div class="chart-column current-week">
+                    <span class="chart-value">24.6</span>
+                    <div class="chart-bar" style="height: 58%;"></div>
+                    <span class="chart-label">Now</span>
+                </div>
+
+            </div>
+
+            <div class="chart-footer">
+                <span>
+                    8-week average:
+                    <strong id="eight-week-average">25.6 mi</strong>
+                </span>
+
+                <a href="progress.html" class="text-link">
+                    View progress →
+                </a>
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- BOTTOM STATS -->
+    <section class="dashboard-bottom-grid">
+
+        <!-- CURRENT STATS -->
+        <article class="dashboard-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">4-WEEK AVERAGE</p>
+                    <h2>Current Training</h2>
+                </div>
+            </div>
+
+            <div class="current-stats-grid">
+
+                <div class="current-stat">
+                    <span class="current-stat-value" id="four-week-pace">
+                        8:12
+                    </span>
+                    <span class="current-stat-unit">/mi</span>
+                    <span class="current-stat-label">Avg Pace</span>
+                </div>
+
+                <div class="current-stat">
+                    <span class="current-stat-value" id="four-week-hr">
+                        166
+                    </span>
+                    <span class="current-stat-unit">bpm</span>
+                    <span class="current-stat-label">Avg HR</span>
+                </div>
+
+                <div class="current-stat">
+                    <span class="current-stat-value" id="four-week-runs">
+                        5.0
+                    </span>
+                    <span class="current-stat-unit">/wk</span>
+                    <span class="current-stat-label">Run Frequency</span>
+                </div>
+
+                <div class="current-stat">
+                    <span class="current-stat-value" id="four-week-mileage">
+                        28.7
+                    </span>
+                    <span class="current-stat-unit">mi</span>
+                    <span class="current-stat-label">Avg Mileage</span>
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- GOAL PROGRESS -->
+        <article class="dashboard-card">
+
+            <div class="card-heading">
+                <div>
+                    <p class="card-label">PERFORMANCE</p>
+                    <h2>PR & Goal Progress</h2>
+                </div>
+
+                <a href="goals.html" class="text-link">
+                    Goals →
+                </a>
+            </div>
+
+            <div class="race-goals">
+
+                <div class="race-goal">
+
+                    <div class="race-goal-title">
+                        <span>5K</span>
+                    </div>
+
+                    <div class="race-times">
+
+                        <div>
+                            <strong id="five-k-pr">18:48</strong>
+                            <span>Current PR</span>
+                        </div>
+
+                        <span class="goal-arrow">→</span>
+
+                        <div>
+                            <strong id="five-k-goal">16:30</strong>
+                            <span>Goal</span>
+                        </div>
+
+                    </div>
+
+                    <div class="goal-track">
+                        <div
+                            class="goal-fill"
+                            id="five-k-goal-progress"
+                            style="width: 65%;">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="race-goal">
+
+                    <div class="race-goal-title">
+                        <span>Season Goal</span>
+                    </div>
+
+                    <p class="season-goal-text">
+                        Keep building consistent mileage while
+                        improving race fitness.
+                    </p>
+
+                    <a href="progress.html" class="text-link">
+                        See full progress →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <!-- BOTTOM SPACING -->
+    <div class="dashboard-bottom-space"></div>
+
+</main>
 
 <script type="module" src="js/dashboard.js"></script>
 </body>

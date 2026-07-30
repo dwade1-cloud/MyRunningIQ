@@ -1,6 +1,7 @@
 // Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import {getFirestore} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -17,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Authentication
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Make auth available to other files
-export { auth };
+export { auth, db };

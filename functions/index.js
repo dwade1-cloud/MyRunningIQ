@@ -1,32 +1,267 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
+const {initializeApp} = require("firebase-admin/app");
+const {getAuth} = require("firebase-admin/auth");
+const {getFirestore} = require("firebase-admin/firestore");
 const {setGlobalOptions} = require("firebase-functions");
 const {onRequest} = require("firebase-functions/https");
-const logger = require("firebase-functions/logger");
 
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
-setGlobalOptions({ maxInstances: 10 });
+initializeApp();
+const db = getFirestore();
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+setGlobalOptions({maxInstances: 10});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+/**
+ * Preserves valid values including zero, otherwise returns null.
+ * @param {*} value Value to check.
+ * @return {*} Original value or null.
+ */
+function valueOrNull(value) {
+  return value === undefined || value === null ? null : value;
+}
+
+exports.stravaCallback = onRequest(
+    {
+      secrets: ["STRAVA_CLIENT_SECRET"],
+      cors: true,
+    },
+    async (request, response) => {
+      try {
+        const authHeader = request.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+          return response.status(401).json({
+            error: "User is not authenticated.",
+          });
+        }
+
+        const idToken = authHeader.split("Bearer ")[1];
+
+        const decodedToken = await getAuth().verifyIdToken(idToken);
+
+        const uid = decodedToken.uid;
+
+        console.log("Authenticated Firebase user:", uid);
+        const code = request.body.code;
+
+        if (!code) {
+          return response.status(400).json({
+            error: "No authorization code received.",
+          });
+        }
+
+        const tokenResponse = await fetch(
+            "https://www.strava.com/oauth/token",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                client_id: "268391",
+                client_secret: process.env.STRAVA_CLIENT_SECRET,
+                code: code,
+                grant_type: "authorization_code",
+              }),
+            },
+        );
+
+        const tokenData = await tokenResponse.json();
+
+        if (!tokenResponse.ok) {
+          return response.status(tokenResponse.status).json({
+            error: "Strava token exchange failed.",
+            details: tokenData,
+          });
+        }
+
+        await db.collection("users").doc(uid).set(
+            {
+              stravaConnected: true,
+              stravaAthleteId: tokenData.athlete.id,
+              stravaConnectedAt: new Date(),
+            },
+            {
+              merge: true,
+            },
+        );
+
+        await db
+            .collection("users")
+            .doc(uid)
+            .collection("private")
+            .doc("strava")
+            .set({
+              accessToken: tokenData.access_token,
+              refreshToken: tokenData.refresh_token,
+              expiresAt: tokenData.expires_at,
+            });
+
+        return response.status(200).json({
+          success: true,
+          athlete: tokenData.athlete,
+          accessTokenReceived: Boolean(tokenData.access_token),
+          refreshTokenReceived: Boolean(tokenData.refresh_token),
+          expiresAt: tokenData.expires_at,
+        });
+      } catch (error) {
+        console.error("Strava callback error:", error);
+
+        return response.status(500).json({
+          error: "Internal server error.",
+        });
+      }
+    },
+);
+
+exports.getStravaActivities = onRequest(
+    {
+      cors: true,
+    },
+    async (request, response) => {
+      try {
+        const authHeader = request.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+          return response.status(401).json({
+            error: "User is not authenticated.",
+          });
+        }
+
+        const idToken = authHeader.split("Bearer ")[1];
+
+        const decodedToken = await getAuth().verifyIdToken(idToken);
+
+        const uid = decodedToken.uid;
+
+        const stravaDoc = await db
+            .collection("users")
+            .doc(uid)
+            .collection("private")
+            .doc("strava")
+            .get();
+
+        if (!stravaDoc.exists) {
+          return response.status(404).json({
+            error: "Strava is not connected.",
+          });
+        }
+
+        const stravaData = stravaDoc.data();
+
+        const activities = [];
+        const perPage = 100;
+        const maxPages = 10;
+        let page = 1;
+        let keepFetching = true;
+
+        while (keepFetching) {
+          const activitiesResponse = await fetch(
+              `https://www.strava.com/api/v3/athlete/activities` +
+            `?per_page=${perPage}&page=${page}`,
+              {
+                headers: {
+                  "Authorization": `Bearer ${stravaData.accessToken}`,
+                },
+              },
+          );
+
+          const pageActivities = await activitiesResponse.json();
+
+          if (!activitiesResponse.ok) {
+            return response.status(activitiesResponse.status).json({
+              error: "Failed to get Strava activities.",
+              details: pageActivities,
+            });
+          }
+
+          activities.push(...pageActivities);
+
+          if (pageActivities.length < perPage || page >= maxPages) {
+            keepFetching = false;
+          } else {
+            page++;
+          }
+        }
+
+        const batchSize = 400;
+
+        for (let i = 0; i < activities.length; i += batchSize) {
+          const batch = db.batch();
+          const activityChunk = activities.slice(i, i + batchSize);
+
+          activityChunk.forEach((activity) => {
+            const activityRef = db
+                .collection("users")
+                .doc(uid)
+                .collection("activities")
+                .doc(String(activity.id));
+
+            batch.set(
+                activityRef,
+                {
+                  stravaActivityId: activity.id,
+                  name: activity.name,
+                  sportType: activity.sport_type,
+                  workoutType: valueOrNull(activity.workout_type),
+
+                  startDate: activity.start_date,
+                  startDateLocal: activity.start_date_local,
+                  timezone: activity.timezone,
+
+                  distanceMeters: activity.distance,
+                  movingTimeSeconds: activity.moving_time,
+                  elapsedTimeSeconds: activity.elapsed_time,
+
+                  totalElevationGainMeters: activity.total_elevation_gain,
+                  elevationHighMeters: valueOrNull(activity.elev_high),
+                  elevationLowMeters: valueOrNull(activity.elev_low),
+
+                  averageSpeedMetersPerSecond:
+                    valueOrNull(activity.average_speed),
+                  maxSpeedMetersPerSecond: valueOrNull(activity.max_speed),
+
+                  hasHeartRate: activity.has_heartrate || false,
+                  averageHeartRate: valueOrNull(activity.average_heartrate),
+                  maxHeartRate: valueOrNull(activity.max_heartrate),
+
+                  averageCadence: valueOrNull(activity.average_cadence),
+                  averageTemperatureCelsius: valueOrNull(activity.average_temp),
+                  sufferScore: valueOrNull(activity.suffer_score),
+
+                  deviceName: valueOrNull(activity.device_name),
+
+                  manual: activity.manual || false,
+                  trainer: activity.trainer || false,
+                  commute: activity.commute || false,
+
+                  achievementCount: activity.achievement_count || 0,
+                  prCount: activity.pr_count || 0,
+
+                  gearId: valueOrNull(activity.gear_id),
+
+                  source: "strava",
+                  importedAt: new Date(),
+                },
+                {
+                  merge: true,
+                },
+            );
+          });
+
+          await batch.commit();
+        }
+
+        return response.status(200).json({
+          success: true,
+          activityCount: activities.length,
+          activitiesImported: activities.length,
+        });
+      } catch (error) {
+        console.error("Get Strava activities error:", error);
+
+        return response.status(500).json({
+          error: "Internal server error.",
+        });
+      }
+    },
+);
+

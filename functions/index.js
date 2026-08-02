@@ -231,6 +231,13 @@ exports.getStravaActivities = onRequest(
 
         const uid = decodedToken.uid;
 
+        console.log("STRAVA DEBUG UID:", uid);
+        console.log("FIRESTORE PROJECT:", db.projectId);
+        console.log(
+            "LOOKING FOR:",
+            `users/${uid}/private/strava`
+        );
+
         const stravaDoc = await db
             .collection("users")
             .doc(uid)
@@ -238,6 +245,11 @@ exports.getStravaActivities = onRequest(
             .doc("strava")
             .get();
 
+        console.log(
+            "STRAVA DOC EXISTS:",
+            stravaDoc.exists
+        );
+        
         if (!stravaDoc.exists) {
           return response.status(404).json({
             error: "Strava is not connected.",

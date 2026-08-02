@@ -839,6 +839,16 @@ async function syncStravaActivities(user) {
         const idToken =
             await user.getIdToken();
 
+        console.log(
+            "CURRENT FIREBASE UID:",
+            user.uid
+        );
+
+        console.log(
+            "CURRENT FIREBASE EMAIL:",
+            user.email
+        );    
+
         const response = await fetch(
             "https://us-central1-myrunningiq.cloudfunctions.net/" +
             "getStravaActivities",
@@ -856,7 +866,8 @@ async function syncStravaActivities(user) {
         if (!response.ok) {
             console.error(
                 "Automatic Strava sync failed:",
-                data
+                response.status,
+                JSON.stringify(data)
             );
 
             return false;

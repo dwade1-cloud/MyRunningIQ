@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Account | MyRunningIQ</title>
+
+    <link
+        rel="stylesheet"
+        href="css/styles.css"
+    >
+
+</head>
+
+<body class="dashboard-body">
+
+<button
+    class="sidebar-toggle"
+    id="sidebar-toggle"
+>
+
+    <svg
+        class="sidebar-toggle-icon"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+    >
+
+        <path
+            d="M9 6l6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+
+    </svg>
+
+</button>
+
+<div
+    class="sidebar"
+    id="sidebar"
+>
+
+    <div class="sidebar-logo-section">
+
+        <img
+            src="images/LogoBlack.png"
+            class="sidebar-logo"
+            alt="MyRunningIQ"
+        >
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="dashboard.html"
+            class="sidebar-link"
+        >
+
+            <span class="sidebar-icon">🏠</span>
+
+            <span class="sidebar-text">
+                Dashboard
+            </span>
+
+        </a>
+
+        <a
+            href="calendar.html"
+            class="sidebar-link"
+        >
+
+            <span class="sidebar-icon">📅</span>
+
+            <span class="sidebar-text">
+                Calendar
+            </span>
+
+        </a>
+
+        <a
+            href="coach.html"
+            class="sidebar-link"
+        >
+
+            <span class="sidebar-icon">🤖</span>
+
+            <span class="sidebar-text">
+                AI Coach
+            </span>
+
+        </a>
+
+    </nav>
+
+    <div class="sidebar-spacer"></div>
+
+    <div class="sidebar-account">
+
+        <a
+            href="account.html"
+            class="sidebar-link sidebar-small active"
+        >
+
+            <span class="sidebar-icon">👤</span>
+
+            <span class="sidebar-text">
+                Account
+            </span>
+
+        </a>
+
+        <a
+            href="settings.html"
+            class="sidebar-link sidebar-small"
+        >
+
+            <span class="sidebar-icon">⚙️</span>
+
+            <span class="sidebar-text">
+                Settings
+            </span>
+
+        </a>
+
+    </div>
+
+    <div class="sidebar-footer">
+
+        <p class="sidebar-version">
+            Version 1.0
+        </p>
+
+    </div>
+
+</div>
+
+<main
+    class="dashboard-main"
+    id="dashboard-main"
+>
+
+<section class="account-header">
+
+    <p class="dashboard-eyebrow">
+        ACCOUNT
+    </p>
+
+    <h1>
+        Runner Profile
+    </h1>
+
+    <p class="dashboard-subtitle">
+        Complete your profile to improve AI coaching.
+    </p>
+
+</section>
+
+<section class="account-progress dashboard-card">
+
+    <div class="account-progress-top">
+
+        <h2>
+            Profile Completion
+        </h2>
+
+        <span id="profile-percent">
+            68%
+        </span>
+
+    </div>
+
+    <div class="progress-track">
+
+        <div
+            class="progress-fill"
+            id="profile-progress-bar"
+            style="width:68%;"
+        ></div>
+
+    </div>
+
+</section>
+
+<section class="account-sections">
+
+<div class="account-card">
+
+<div
+    class="account-card-header"
+    data-target="personal"
+>
+
+<h2>
+
+Personal Information
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+    class="account-card-body"
+    id="personal"
+>
+
+<div class="account-row">
+
+<span>First Name</span>
+
+<span id="first-name">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Last Name</span>
+
+<span id="last-name">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Email</span>
+
+<span id="email">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Birthday</span>
+
+<span id="birthday">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Age</span>
+
+<span id="age">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Height</span>
+
+<span id="height">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>Weight</span>
+
+<span id="weight">
+
+—
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="background"
+>
+
+<h2>
+
+Running Background
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="background"
+>
+
+<div class="account-row">
+
+<span>
+
+Years Running
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Primary Event
+
+</span>
+
+<span>
+
+5K
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Current Weekly Mileage
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Highest Weekly Mileage
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="goals"
+>
+
+<h2>
+
+Goals & Personal Records
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="goals"
+>
+
+<div class="account-row">
+
+<span>
+
+Goal Race
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Goal Time
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+5K PR
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Mile PR
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="health"
+>
+
+<h2>
+
+Health & Biometrics
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="health"
+>
+
+<div class="account-row">
+
+<span>
+
+VO₂ Max
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Resting HR
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Max HR
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Injury History
+
+</span>
+
+<span>
+
+None
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="equipment"
+>
+
+<h2>
+
+Equipment
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="equipment"
+>
+
+<div class="account-row">
+
+<span>
+
+Watch
+
+</span>
+
+<span>
+
+Garmin
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Daily Trainer
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Race Shoe
+
+</span>
+
+<span>
+
+—
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="connections"
+>
+
+<h2>
+
+Connected Services
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="connections"
+>
+
+<div class="account-row">
+
+<span>
+
+Strava
+
+</span>
+
+<span>
+
+✅ Connected
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="account-card">
+
+<div
+class="account-card-header"
+data-target="stats"
+>
+
+<h2>
+
+Lifetime Statistics
+
+</h2>
+
+<span>▼</span>
+
+</div>
+
+<div
+class="account-card-body"
+id="stats"
+>
+
+<div class="account-row">
+
+<span>
+
+Activities
+
+</span>
+
+<span id="activities">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Miles
+
+</span>
+
+<span id="miles">
+
+—
+
+</span>
+
+</div>
+
+<div class="account-row">
+
+<span>
+
+Member Since
+
+</span>
+
+<span id="member">
+
+—
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="js/sidebar.js"></script>
+
+<script type="module" src="js/account.js"></script>
+
+</body>
+
+</html>

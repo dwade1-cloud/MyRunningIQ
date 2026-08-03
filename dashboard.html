@@ -81,7 +81,8 @@
 
 </div>
 
-<main class="dashboard-main">
+<main class="dashboard-main"
+      id="dashboard-main">
 
     <!-- DASHBOARD HEADER -->
     <section class="dashboard-header">
@@ -186,9 +187,6 @@
                     <h2 id="latest-run-name">-</h2>
                 </div>
 
-                <div class="run-icon">
-                    &#10140;
-                </div>
             </div>
 
             <p class="latest-run-date" id="latest-run-date">
@@ -249,11 +247,6 @@
                 </div>
 
             </div>
-
-            <button class="orange-button" id="view-latest-activity">
-                View Activity
-                <span>→</span>
-            </button>
 
         </article>
 
@@ -350,63 +343,54 @@
 
         </article>
 
-    </section>
+        <!-- AI COACH -->
+        <article class="dashboard-card ai-section">
 
+            <div class="section-heading">
+                <div>
+                    <p class="card-label">MYRUNNINGIQ AI</p>
+                    <h2>AI Coach</h2>
+                </div>
 
-    <!-- AI COACH -->
-    <section class="dashboard-section ai-section">
-
-        <div class="section-heading">
-            <div>
-                <p class="card-label">MYRUNNINGIQ AI</p>
-                <h2>AI Coach</h2>
+                <p>
+                    Turn your training data into useful feedback.
+                </p>
             </div>
 
-            <p>
-                Turn your training data into useful feedback.
-            </p>
-        </div>
+            <div class="ai-card-grid">
 
-        <div class="ai-card-grid">
+                <button class="ai-action-card">
 
-            <button class="ai-action-card">
+                    <div class="ai-card-text">
+                        <h3>Analyze My Training</h3>
+                        <p>
+                            Get an AI analysis of your recent training,
+                            workload and progress.
+                        </p>
+                    </div>
 
-                <div class="ai-icon">
-                    ✦
-                </div>
+                    <span class="ai-arrow">→</span>
 
-                <div class="ai-card-text">
-                    <h3>Analyze My Training</h3>
-                    <p>
-                        Get an AI analysis of your recent training,
-                        workload and progress.
-                    </p>
-                </div>
-
-                <span class="ai-arrow">→</span>
-
-            </button>
+                </button>
 
 
-            <button class="ai-action-card">
+                <button class="ai-action-card">
 
-                <div class="ai-icon">
-                    ◌
-                </div>
-
-                <div class="ai-card-text">
-                    <h3>Ask My Coach</h3>
-                    <p>
+                    <div class="ai-card-text">
+                        <h3>Ask My Coach</h3>
+                        <p>
                         Ask questions about your runs, goals and
                         training history.
-                    </p>
-                </div>
+                        </p>
+                    </div>
 
-                <span class="ai-arrow">→</span>
+                    <span class="ai-arrow">→</span>
 
-            </button>
+                </button>
 
-        </div>
+            </div>
+
+        </article>
 
     </section>
 

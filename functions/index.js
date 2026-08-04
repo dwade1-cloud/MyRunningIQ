@@ -3,6 +3,7 @@ const {getAuth} = require("firebase-admin/auth");
 const {getFirestore} = require("firebase-admin/firestore");
 const {setGlobalOptions} = require("firebase-functions");
 const {onRequest} = require("firebase-functions/https");
+const OpenAI = require("openai");
 
 initializeApp();
 const db = getFirestore();
@@ -265,7 +266,6 @@ exports.getStravaActivities = onRequest(
             secondsSinceLastSync <
     syncCooldownSeconds
           ) {
-
             return response.status(200).json({
               success: true,
               skipped: true,
@@ -428,4 +428,46 @@ exports.getStravaActivities = onRequest(
       }
     },
 );
+
+exports.testAI = onRequest(
+    {
+      cors: true,
+      secrets: ["OPENAI_API_KEY"],
+    },
+    async (request, response) => {
+      try {
+        const authHeader = request.headers.authorization;
+
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+          return response.status(401).json({
+            error: "User is not authenticated.",
+          });
+        }
+
+        const idToken = authHeader.split("Bearer ")[1];
+        await getAuth().verifyIdToken(idToken);
+
+        const openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY,
+        });
+
+        const completion = await openai.responses.create({
+          model: "gpt-5.5",
+          input: "Say hello to MyRunningIQ in one sentence.",
+        });
+
+        return response.status(200).json({
+          success: true,
+          response: completion.output_text,
+        });
+      } catch (error) {
+        console.error(error);
+
+        return response.status(500).json({
+          error: error.message,
+        });
+      }
+    },
+);
+
 

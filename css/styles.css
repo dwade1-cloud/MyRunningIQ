@@ -2122,9 +2122,7 @@ width:100%;
 /* #endregion */
 /* #region Account */
 
-.account-header{
-    margin-bottom:26px;
-}
+.account-header{margin-bottom:26px;}
 
 .account-progress{
     padding:24px;
@@ -2157,7 +2155,7 @@ width:100%;
 }
 
 .account-card{
-    background:#ffffff;
+    background:#fff;
     border:1px solid #e8e8e8;
     border-radius:16px;
     overflow:hidden;
@@ -2170,8 +2168,8 @@ width:100%;
     align-items:center;
     padding:22px 24px;
     cursor:pointer;
-    transition:.2s;
     user-select:none;
+    transition:.2s;
 }
 
 .account-card-header:hover{
@@ -2181,8 +2179,8 @@ width:100%;
 .account-card-header h2{
     margin:0;
     font-size:19px;
-    color:#222;
     font-weight:700;
+    color:#222;
 }
 
 .account-card-header span{
@@ -2203,8 +2201,8 @@ width:100%;
 }
 
 .account-card.open .account-card-body{
-    max-height:1200px;
-    border-top:1px solid #eeeeee;
+    max-height:2500px;
+    border-top:1px solid #eee;
 }
 
 .account-row{
@@ -2213,7 +2211,6 @@ width:100%;
     align-items:center;
     padding:18px 24px;
     border-bottom:1px solid #f1f1f1;
-    transition:.15s;
 }
 
 .account-row:last-child{
@@ -2225,70 +2222,78 @@ width:100%;
 }
 
 .account-row span:first-child{
-    font-size:15px;
     color:#666;
     font-weight:600;
 }
 
 .account-row span:last-child{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:15px;
+    color:#222;
+    font-weight:700;
+}
+
+/* ---------- Shoe Cards ---------- */
+
+.account-subheading{
+    margin:24px 24px 12px;
+    font-size:17px;
     font-weight:700;
     color:#222;
 }
 
-.account-value{
-    cursor:pointer;
-    transition:.15s;
+#shoe-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding:0 24px 24px;
 }
 
-.account-value:hover{
-    color:#f47b20;
+.shoe-card{
+    border:1px solid #e8e8e8;
+    border-radius:12px;
+    padding:18px;
+    background:#fafafa;
 }
 
-.account-edit{
-    opacity:0;
+.shoe-card h4{
+    margin:0 0 4px;
+    font-size:17px;
+    color:#222;
+}
+
+.shoe-card p{
+    margin:4px 0;
+    color:#666;
     font-size:14px;
-    color:#999;
-    cursor:pointer;
-    transition:.2s;
 }
 
-.account-row:hover .account-edit{
-    opacity:1;
+.shoe-card select{
+    width:100%;
+    margin-top:12px;
+    padding:10px 12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:14px;
+    background:#fff;
 }
 
-.account-edit:hover{
-    color:#f47b20;
+.shoe-card select:focus{
+    outline:none;
+    border-color:#f47b20;
+    box-shadow:0 0 0 3px rgba(244,123,32,.1);
 }
 
-.account-empty{
-    color:#999;
-    font-style:italic;
-}
-
-.account-connected{
-    color:#2e9f50;
-    font-weight:700;
-}
-
-.account-disconnected{
-    color:#d33;
-    font-weight:700;
-}
+/* ---------- Inputs ---------- */
 
 .account-card-body input{
     width:220px;
     padding:10px 12px;
-    border:1px solid #dddddd;
+    border:1px solid #ddd;
     border-radius:8px;
-    outline:none;
     font-size:14px;
 }
 
 .account-card-body input:focus{
+    outline:none;
     border-color:#f47b20;
     box-shadow:0 0 0 3px rgba(244,123,32,.08);
 }
@@ -2298,14 +2303,18 @@ width:100%;
     gap:10px;
 }
 
+.account-save,
+.account-cancel{
+    padding:9px 16px;
+    border:none;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+}
+
 .account-save{
     background:#f47b20;
-    color:white;
-    border:none;
-    padding:9px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
+    color:#fff;
 }
 
 .account-save:hover{
@@ -2313,31 +2322,25 @@ width:100%;
 }
 
 .account-cancel{
-    background:#eeeeee;
+    background:#eee;
     color:#333;
-    border:none;
-    padding:9px 16px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
 }
 
 .account-cancel:hover{
-    background:#dddddd;
+    background:#ddd;
 }
+
+.account-connected{
+    color:#2e9f50;
+}
+
+.account-disconnected{
+    color:#d33;
+}
+
+/* ---------- Mobile ---------- */
 
 @media(max-width:800px){
-
-.account-row{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
-}
-
-.account-row span:last-child{
-    width:100%;
-    justify-content:space-between;
-}
 
 .account-progress-top{
     flex-direction:column;
@@ -2350,10 +2353,23 @@ width:100%;
 }
 
 .account-row{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
     padding:16px 20px;
 }
 
+.account-row span:last-child{
+    width:100%;
+    justify-content:space-between;
 }
+
+#shoe-list{
+    padding:0 20px 20px;
+}
+
+}
+
 /* #endregion */
 /* #region Settings */
 /* #endregion */

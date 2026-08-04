@@ -109,12 +109,264 @@ async function getValidStravaAccessToken(
 }
 
 /**
+ * Saves calculated statistics to Firestore.
+ *
+ * @param {string} uid
+ * @param {Object} statistics
+ * @return {Promise<void>}
+ */
+async function saveStatistics(uid, statistics) {
+  await db
+      .collection("users")
+      .doc(uid)
+      .collection("statistics")
+      .doc("summary")
+      .set(statistics, {
+        merge: true,
+      });
+}
+
+/**
+ * Saves equipment information to Firestore.
+ *
+ * @param {string} uid
+ * @param {Object} equipment
+ * @return {Promise<void>}
+ */
+async function saveEquipment(uid, equipment) {
+  await db
+      .collection("users")
+      .doc(uid)
+      .collection("equipment")
+      .doc("summary")
+      .set(equipment, {
+        merge: true,
+      });
+}
+
+/**
  * Preserves valid values including zero, otherwise returns null.
  * @param {*} value Value to check.
  * @return {*} Original value or null.
  */
 function valueOrNull(value) {
   return value === undefined || value === null ? null : value;
+}
+
+/**
+ * Calculates summary statistics from imported Strava activities.
+ *
+ * @param {Array} activities
+ * @return {Object}
+ */
+function calculateStatistics(activities) {
+  const METERS_TO_MILES = 0.000621371;
+
+  const runningActivities = activities.filter((activity) =>
+    [
+      "Run",
+      "TrailRun",
+      "VirtualRun",
+    ].includes(activity.sportType),
+  );
+
+  const stats = {
+    activityCount: runningActivities.length,
+    lifetimeMiles: 0,
+    totalTimeRunningSeconds: 0,
+    lastCompletedWeekMileage: 0,
+    highestWeeklyMileage: 0,
+    averageRunsPerWeek8Weeks: 0,
+    averageWeeklyMileage8Weeks: 0,
+    longestRun: 0,
+    maxHeartRate: 0,
+  };
+
+  const weeklyMileage = {};
+
+  let runsLast8Weeks = 0;
+  let milesLast8Weeks = 0;
+
+  const now = new Date();
+
+  // Beginning of this week (Monday)
+  const thisWeekStart = new Date(now);
+  thisWeekStart.setHours(0, 0, 0, 0);
+
+  const day = thisWeekStart.getDay();
+  const diff = day === 0 ? 6 : day - 1;
+  thisWeekStart.setDate(thisWeekStart.getDate() - diff);
+
+  // Beginning of last week
+  const lastWeekStart = new Date(thisWeekStart);
+  lastWeekStart.setDate(lastWeekStart.getDate() - 7);
+
+  // End of last week
+  const lastWeekEnd = new Date(thisWeekStart);
+  lastWeekEnd.setMilliseconds(-1);
+
+  const eightWeeksAgo = new Date(lastWeekStart);
+  eightWeeksAgo.setDate(eightWeeksAgo.getDate() - (7 * 7));
+
+  runningActivities.forEach((activity) => {
+    const miles =
+      (activity.distanceMeters || 0) * METERS_TO_MILES;
+
+    stats.lifetimeMiles += miles;
+
+    stats.totalTimeRunningSeconds +=
+      activity.movingTimeSeconds || 0;
+
+    if (miles > stats.longestRun) {
+      stats.longestRun = miles;
+    }
+
+    if (
+      activity.maxHeartRate &&
+      activity.maxHeartRate > stats.maxHeartRate
+    ) {
+      stats.maxHeartRate =
+        activity.maxHeartRate;
+    }
+
+    const activityDate =
+      new Date(activity.startDate);
+
+    if (
+      activityDate >= eightWeeksAgo &&
+        activityDate <= lastWeekEnd
+    ) {
+      runsLast8Weeks++;
+      milesLast8Weeks += miles;
+    }
+
+    if (
+      activityDate >= lastWeekStart &&
+      activityDate <= lastWeekEnd
+    ) {
+      stats.lastCompletedWeekMileage += miles;
+    }
+
+    const weekKey =
+      activityDate.getFullYear() +
+      "-" +
+      Math.ceil(
+          (
+            (activityDate -
+              new Date(activityDate.getFullYear(), 0, 1)
+            ) /
+            86400000 +
+            1
+          ) / 7,
+      );
+
+    weeklyMileage[weekKey] =
+      (weeklyMileage[weekKey] || 0) + miles;
+  });
+
+  stats.highestWeeklyMileage =
+    Math.max(
+        0,
+        ...Object.values(weeklyMileage),
+    );
+
+  stats.averageRunsPerWeek8Weeks =
+    Number((runsLast8Weeks / 8).toFixed(1));
+
+  stats.averageWeeklyMileage8Weeks =
+    Number((milesLast8Weeks / 8).toFixed(1));
+
+  stats.lifetimeMiles =
+    Number(stats.lifetimeMiles.toFixed(1));
+
+  stats.lastCompletedWeekMileage =
+    Number(stats.lastCompletedWeekMileage.toFixed(1));
+
+  stats.highestWeeklyMileage =
+    Number(stats.highestWeeklyMileage.toFixed(1));
+
+  stats.longestRun =
+    Number(stats.longestRun.toFixed(1));
+
+  return stats;
+}
+
+/**
+ * Finds the user's most recently used watch.
+ *
+ * @param {Array} activities
+ * @return {string}
+ */
+function getWatch(activities) {
+  const runningActivities = activities.filter((activity) =>
+    activity.sportType === "Run" ||
+    activity.sportType === "TrailRun" ||
+    activity.sportType === "VirtualRun",
+  );
+
+  runningActivities.sort(
+      (a, b) => new Date(b.startDate) - new Date(a.startDate),
+  );
+
+  for (const activity of runningActivities) {
+    if (
+      activity.deviceName &&
+      activity.deviceName.trim() !== ""
+    ) {
+      return activity.deviceName;
+    }
+  }
+
+  return "";
+}
+
+/**
+ * Downloads gear information from Strava.
+ *
+ * @param {string} accessToken
+ * @param {Array} activities
+ * @return {Promise<Object>}
+ */
+async function syncGear(accessToken, activities) {
+  const gearIds = new Set();
+
+  activities.forEach((activity) => {
+    if (activity.gearId) {
+      gearIds.add(activity.gearId);
+    }
+  });
+
+  const shoes = {};
+
+  for (const gearId of gearIds) {
+    const response = await fetch(
+        `https://www.strava.com/api/v3/gear/${gearId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        },
+    );
+
+    if (!response.ok) {
+      continue;
+    }
+
+    const gearData = await response.json();
+
+    shoes[gearData.id] = {
+      id: gearData.id,
+      name: gearData.name || "",
+      brand: gearData.brand_name || "",
+      model: gearData.model_name || "",
+      distanceMeters: gearData.distance || 0,
+    };
+  }
+
+  return {
+    watch: "",
+    shoes,
+  };
 }
 
 exports.stravaCallback = onRequest(
@@ -305,6 +557,10 @@ exports.getStravaActivities = onRequest(
               `&after=${afterTimestamp}`;
           }
 
+          const detail = await detailResponse.json();
+
+          console.log(detail);
+
           const activitiesResponse = await fetch(
               activitiesUrl,
               {
@@ -357,7 +613,7 @@ exports.getStravaActivities = onRequest(
                   startDateLocal: activity.start_date_local,
                   timezone: activity.timezone,
 
-                  distanceMeters: activity.distance,
+                  distanceMeters: activity.distance || 0,
                   movingTimeSeconds: activity.moving_time,
                   elapsedTimeSeconds: activity.elapsed_time,
 
@@ -399,6 +655,26 @@ exports.getStravaActivities = onRequest(
 
           await batch.commit();
         }
+
+        const allActivitiesSnapshot = await db
+            .collection("users")
+            .doc(uid)
+            .collection("activities")
+            .get();
+
+        const allActivities = allActivitiesSnapshot.docs.map((doc) =>
+          doc.data());
+
+        const statistics = calculateStatistics(allActivities);
+
+        await saveStatistics(uid, statistics);
+
+        const equipment =
+            await syncGear(accessToken, allActivities);
+
+        equipment.watch = getWatch(allActivities);
+
+        await saveEquipment(uid, equipment);
 
         await db
             .collection("users")

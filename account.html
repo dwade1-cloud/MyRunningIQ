@@ -149,7 +149,7 @@
 
         <div
             class="account-view-mode"
-            data-section="personal">
+            id="personal-view">
 
             <div class="account-row">
                 <span>Full Name</span>
@@ -187,7 +187,7 @@
 
         <div
             class="account-edit-mode"
-            data-section="personal"
+            id="personal-edit"
             style="display:none;">
 
             <label>Full Name</label>
@@ -350,7 +350,6 @@
             <label>
                 Years Running
             </label>
-
             <input
                 type="number"
                 id="edit-years-running">
@@ -358,13 +357,8 @@
             <label>
                 Primary Event
             </label>
-
             <select id="edit-primary-event">
-
-                <option value="">
-                    Select Distance
-                </option>
-
+                <option value="">Select Distance</option>
                 <option>100m</option>
                 <option>200m</option>
                 <option>400m</option>
@@ -386,8 +380,23 @@
                 <option>100K</option>
                 <option>100 Miles</option>
                 <option>Other</option>
-
             </select>
+
+            <label>
+                Highest Weekly Mileage
+            </label>
+            <input
+                type="number"
+                step="0.1"
+                id="edit-highest-weekly-mileage">
+
+            <label>
+                Longest Run
+            </label>
+            <input
+                type="number"
+                step="0.1"
+                id="edit-longest-run">
 
         </div>
 
@@ -438,51 +447,64 @@
     <div class="account-card-body">
 
         <!-- VIEW MODE -->
-
         <div
             class="account-view-mode"
             id="goals-view">
 
-            <div class="account-row">
-                <span>PR #1</span>
-                <span id="pr1">—</span>
-            </div>
-
-            <div class="account-row">
-                <span>PR #2</span>
-                <span id="pr2">—</span>
+            <div id="pr-list">
+                <!-- JavaScript builds this automatically -->
             </div>
 
         </div>
 
         <!-- EDIT MODE -->
-
         <div
             class="account-edit-mode"
             id="goals-edit"
             style="display:none;">
 
-            <label>
-                Personal Record #1
-            </label>
+            <label>400m</label>
+            <input type="text" id="edit-pr400">
 
-            <input
-                type="text"
-                id="edit-pr1">
+            <label>800m</label>
+            <input type="text" id="edit-pr800">
 
-            <label>
-                Personal Record #2
-            </label>
+            <label>1500m</label>
+            <input type="text" id="edit-pr1500">
 
-            <input
-                type="text"
-                id="edit-pr2">
+            <label>1 Mile</label>
+            <input type="text" id="edit-prMile">
+
+            <label>3000m</label>
+            <input type="text" id="edit-pr3000">
+
+            <label>2 Mile</label>
+            <input type="text" id="edit-pr2Mile">
+
+            <label>5K</label>
+            <input type="text" id="edit-pr5k">
+
+            <label>8K</label>
+            <input type="text" id="edit-pr8k">
+
+            <label>10K</label>
+            <input type="text" id="edit-pr10k">
+
+            <label>15K</label>
+            <input type="text" id="edit-pr15k">
+
+            <label>10 Mile</label>
+            <input type="text" id="edit-pr10Mile">
+
+            <label>Half Marathon</label>
+            <input type="text" id="edit-prHalf">
+
+            <label>Marathon</label>
+            <input type="text" id="edit-prMarathon">
 
         </div>
-
     </div>
-
-</div>
+</div>    
 
 <!-- =========================================================
      HEALTH & BIOMETRICS

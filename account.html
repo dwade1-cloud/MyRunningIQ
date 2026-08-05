@@ -61,235 +61,618 @@
 <main class="dashboard-main" id="dashboard-main">
 
 <section class="account-header">
-    <p class="dashboard-eyebrow">ACCOUNT</p>
-    <h1>Runner Profile</h1>
+
+    <p class="dashboard-eyebrow">
+        ACCOUNT
+    </p>
+
+    <h1>
+        Runner Profile
+    </h1>
+
     <p class="dashboard-subtitle">
         Complete your profile to improve AI coaching.
     </p>
+
 </section>
 
 <section class="account-progress dashboard-card">
 
     <div class="account-progress-top">
-        <h2>Profile Completion</h2>
-        <span id="profile-percent">0%</span>
+
+        <h2>
+            Profile Completion
+        </h2>
+
+        <span id="profile-percent">
+            0%
+        </span>
+
     </div>
 
     <div class="progress-track">
-        <div id="profile-progress-bar" class="progress-fill"></div>
+
+        <div
+            id="profile-progress-bar"
+            class="progress-fill">
+        </div>
+
     </div>
 
 </section>
 
 <section class="account-sections">
 
-<!-- PERSONAL -->
+<!-- =========================================================
+     PERSONAL INFORMATION
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Personal Information</h2>
-        <span>▼</span>
+
+        <h2>
+            Personal Information
+        </h2>
+
+        <div class="account-header-actions">
+
+            <button
+                class="account-edit-section"
+                data-section="personal">
+                Edit
+            </button>
+
+            <button
+                class="account-save-section"
+                data-section="personal"
+                style="display:none;">
+                Save
+            </button>
+
+            <button
+                class="account-cancel-section"
+                data-section="personal"
+                style="display:none;">
+                Cancel
+            </button>
+
+            <span>▼</span>
+
+        </div>
+
     </div>
 
     <div class="account-card-body">
 
-        <div class="account-row">
-            <span>Full Name</span>
-            <span id="full-name">—</span>
+        <!-- VIEW MODE -->
+
+        <div
+            class="account-view-mode"
+            data-section="personal">
+
+            <div class="account-row">
+                <span>Full Name</span>
+                <span id="full-name">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Email</span>
+                <span id="email">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Age</span>
+                <span id="age">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Sex</span>
+                <span id="sex">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Height</span>
+                <span id="height">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Weight</span>
+                <span id="weight">—</span>
+            </div>
+
         </div>
 
-        <div class="account-row">
-            <span>Email</span>
-            <span id="email">—</span>
-        </div>
+        <!-- EDIT MODE -->
 
-        <div class="account-row">
-            <span>Age</span>
-            <span id="age">—</span>
-        </div>
+        <div
+            class="account-edit-mode"
+            data-section="personal"
+            style="display:none;">
 
-        <div class="account-row">
-            <span>Sex</span>
-            <span id="sex">—</span>
-        </div>
+            <label>Full Name</label>
 
-        <div class="account-row">
-            <span>Height</span>
-            <span id="height">—</span>
-        </div>
+            <input
+                type="text"
+                id="edit-full-name">
 
-        <div class="account-row">
-            <span>Weight</span>
-            <span id="weight">—</span>
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="edit-email"
+                disabled>
+
+            <label>Date of Birth</label>
+
+            <input
+                type="date"
+                id="edit-birthday">
+
+            <label>Sex</label>
+
+            <select id="edit-sex">
+
+                <option value="">
+                    Select
+                </option>
+
+                <option value="Male">
+                    Male
+                </option>
+
+                <option value="Female">
+                    Female
+                </option>
+
+            </select>
+
+            <label>Height</label>
+
+            <div class="tutorial-height-row">
+
+                <input
+                    type="number"
+                    id="edit-height-feet"
+                    placeholder="Feet">
+
+                <input
+                    type="number"
+                    id="edit-height-inches"
+                    placeholder="Inches">
+
+            </div>
+
+            <label>Weight (lbs)</label>
+
+            <input
+                type="number"
+                id="edit-weight">
+
         </div>
 
     </div>
 
 </div>
 
-<!-- RUNNING BACKGROUND -->
+<!-- =========================================================
+     RUNNING BACKGROUND
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Running Background</h2>
-        <span>▼</span>
+
+        <h2>
+            Running Background
+        </h2>
+
+        <div class="account-header-actions">
+
+            <button
+                class="account-edit-section"
+                data-section="running">
+                Edit
+            </button>
+
+            <button
+                class="account-save-section"
+                data-section="running"
+                style="display:none;">
+                Save
+            </button>
+
+            <button
+                class="account-cancel-section"
+                data-section="running"
+                style="display:none;">
+                Cancel
+            </button>
+
+            <span>▼</span>
+
+        </div>
+
     </div>
 
     <div class="account-card-body">
 
-        <div class="account-row">
-            <span>Years Running</span>
-            <span id="years-running">—</span>
+        <!-- VIEW MODE -->
+
+        <div
+            class="account-view-mode"
+            id="running-view">
+
+            <div class="account-row">
+                <span>Years Running</span>
+                <span id="years-running">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Primary Event</span>
+                <span id="primary-event">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Current Weekly Mileage</span>
+                <span id="current-weekly-mileage">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Highest Weekly Mileage</span>
+                <span id="highest-weekly-mileage">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Average Runs / Week</span>
+                <span id="average-runs-week">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Average Weekly Mileage</span>
+                <span id="average-weekly-mileage">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Longest Run</span>
+                <span id="longest-run">—</span>
+            </div>
+
         </div>
 
-        <div class="account-row">
-            <span>Primary Event</span>
-            <span id="primary-event">—</span>
-        </div>
+        <!-- EDIT MODE -->
 
-        <div class="account-row">
-            <span>Current Weekly Mileage</span>
-            <span id="current-weekly-mileage">—</span>
-        </div>
+        <div
+            class="account-edit-mode"
+            id="running-edit"
+            style="display:none;">
 
-        <div class="account-row">
-            <span>Highest Weekly Mileage</span>
-            <span id="highest-weekly-mileage">—</span>
-        </div>
+            <label>
+                Years Running
+            </label>
 
-        <div class="account-row">
-            <span>Average Runs / Week</span>
-            <span id="average-runs-week">—</span>
-        </div>
+            <input
+                type="number"
+                id="edit-years-running">
 
-        <div class="account-row">
-            <span>Average Weekly Mileage</span>
-            <span id="average-weekly-mileage">—</span>
-        </div>
+            <label>
+                Primary Event
+            </label>
 
-        <div class="account-row">
-            <span>Longest Run</span>
-            <span id="longest-run">—</span>
+            <select id="edit-primary-event">
+
+                <option value="">
+                    Select Distance
+                </option>
+
+                <option>100m</option>
+                <option>200m</option>
+                <option>400m</option>
+                <option>600m</option>
+                <option>800m</option>
+                <option>1500m</option>
+                <option>1600m</option>
+                <option>3000m</option>
+                <option>1 Mile</option>
+                <option>5K</option>
+                <option>10K</option>
+                <option>15K</option>
+                <option>10 Miles</option>
+                <option>20K</option>
+                <option>Half Marathon</option>
+                <option>Marathon</option>
+                <option>50K</option>
+                <option>50 Miles</option>
+                <option>100K</option>
+                <option>100 Miles</option>
+                <option>Other</option>
+
+            </select>
+
         </div>
 
     </div>
 
 </div>
 
-<!-- GOALS -->
+<!-- =========================================================
+     GOALS & PERSONAL RECORDS
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Goals & Personal Records</h2>
-        <span>▼</span>
+
+        <h2>
+            Goals & Personal Records
+        </h2>
+
+        <div class="account-header-actions">
+
+            <button
+                class="account-edit-section"
+                data-section="goals">
+                Edit
+            </button>
+
+            <button
+                class="account-save-section"
+                data-section="goals"
+                style="display:none;">
+                Save
+            </button>
+
+            <button
+                class="account-cancel-section"
+                data-section="goals"
+                style="display:none;">
+                Cancel
+            </button>
+
+            <span>▼</span>
+
+        </div>
+
     </div>
 
     <div class="account-card-body">
 
-        <div class="account-row">
-            <span>PR #1</span>
-            <span id="pr1">—</span>
+        <!-- VIEW MODE -->
+
+        <div
+            class="account-view-mode"
+            id="goals-view">
+
+            <div class="account-row">
+                <span>PR #1</span>
+                <span id="pr1">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>PR #2</span>
+                <span id="pr2">—</span>
+            </div>
+
         </div>
 
-        <div class="account-row">
-            <span>PR #2</span>
-            <span id="pr2">—</span>
+        <!-- EDIT MODE -->
+
+        <div
+            class="account-edit-mode"
+            id="goals-edit"
+            style="display:none;">
+
+            <label>
+                Personal Record #1
+            </label>
+
+            <input
+                type="text"
+                id="edit-pr1">
+
+            <label>
+                Personal Record #2
+            </label>
+
+            <input
+                type="text"
+                id="edit-pr2">
+
         </div>
 
     </div>
 
 </div>
 
-<!-- HEALTH -->
+<!-- =========================================================
+     HEALTH & BIOMETRICS
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Health & Biometrics</h2>
-        <span>▼</span>
+
+        <h2>
+            Health & Biometrics
+        </h2>
+
+        <div class="account-header-actions">
+
+            <button
+                class="account-edit-section"
+                data-section="health">
+                Edit
+            </button>
+
+            <button
+                class="account-save-section"
+                data-section="health"
+                style="display:none;">
+                Save
+            </button>
+
+            <button
+                class="account-cancel-section"
+                data-section="health"
+                style="display:none;">
+                Cancel
+            </button>
+
+            <span>▼</span>
+
+        </div>
+
     </div>
 
     <div class="account-card-body">
 
-        <div class="account-row">
-            <span>VO₂ Max</span>
-            <span id="vo2-max">—</span>
+        <!-- VIEW MODE -->
+
+        <div
+            class="account-view-mode"
+            id="health-view">
+
+            <div class="account-row">
+                <span>VO₂ Max</span>
+                <span id="vo2-max">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Resting HR</span>
+                <span id="resting-hr">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Max HR</span>
+                <span id="max-heart-rate">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Injury History</span>
+                <span id="injury-history">—</span>
+            </div>
+
         </div>
 
-        <div class="account-row">
-            <span>Resting HR</span>
-            <span id="resting-hr">—</span>
-        </div>
+        <!-- EDIT MODE -->
 
-        <div class="account-row">
-            <span>Max HR</span>
-            <span id="max-heart-rate">—</span>
-        </div>
+        <div
+            class="account-edit-mode"
+            id="health-edit"
+            style="display:none;">
 
-        <div class="account-row">
-            <span>Injury History</span>
-            <span id="injury-history">—</span>
+            <label>
+                VO₂ Max
+            </label>
+
+            <input
+                type="number"
+                id="edit-vo2-max">
+
+            <label>
+                Resting Heart Rate
+            </label>
+
+            <input
+                type="number"
+                id="edit-resting-hr">
+
+            <label>
+                Injury History
+            </label>
+
+            <textarea
+                id="edit-injury-history"
+                rows="4"></textarea>
+
         </div>
 
     </div>
 
 </div>
 
-<!-- EQUIPMENT -->
+<!-- =========================================================
+     EQUIPMENT
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Equipment</h2>
+
+        <h2>
+            Equipment
+        </h2>
+
         <span>▼</span>
+
     </div>
 
     <div class="account-card-body">
 
         <div class="account-row">
+
             <span>Watch</span>
+
             <span id="watch">—</span>
+
         </div>
 
-        <h3 class="account-subheading">Shoes</h3>
+        <h3 class="account-subheading">
+            Shoes
+        </h3>
 
-        <!-- JavaScript builds shoe cards here -->
         <div id="shoe-list"></div>
 
     </div>
 
 </div>
 
-<!-- CONNECTED SERVICES -->
+<!-- =========================================================
+     CONNECTED SERVICES
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Connected Services</h2>
+
+        <h2>
+            Connected Services
+        </h2>
+
         <span>▼</span>
+
     </div>
 
     <div class="account-card-body">
 
         <div class="account-row">
+
             <span>Strava</span>
-            <span id="strava-status">Not Connected</span>
+
+            <span id="strava-status">
+                Not Connected
+            </span>
+
         </div>
 
     </div>
 
 </div>
 
-<!-- LIFETIME STATS -->
+<!-- =========================================================
+     LIFETIME STATISTICS
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Lifetime Statistics</h2>
+
+        <h2>
+            Lifetime Statistics
+        </h2>
+
         <span>▼</span>
+
     </div>
 
     <div class="account-card-body">
@@ -318,30 +701,147 @@
 
 </div>
 
-<!-- PREFERENCES -->
+<!-- =========================================================
+     PREFERENCES
+========================================================= -->
 
 <div class="account-card">
 
     <div class="account-card-header">
-        <h2>Preferences</h2>
-        <span>▼</span>
+
+        <h2>
+            Preferences
+        </h2>
+
+        <div class="account-header-actions">
+
+            <button
+                class="account-edit-section"
+                data-section="preferences">
+                Edit
+            </button>
+
+            <button
+                class="account-save-section"
+                data-section="preferences"
+                style="display:none;">
+                Save
+            </button>
+
+            <button
+                class="account-cancel-section"
+                data-section="preferences"
+                style="display:none;">
+                Cancel
+            </button>
+
+            <span>▼</span>
+
+        </div>
+
     </div>
 
     <div class="account-card-body">
 
-        <div class="account-row">
-            <span>Preferred Long Run Day</span>
-            <span id="preferred-long-run-day">—</span>
+        <!-- VIEW MODE -->
+
+        <div
+            class="account-view-mode"
+            id="preferences-view">
+
+            <div class="account-row">
+                <span>Preferred Start of Week</span>
+                <span id="weekStart">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Preferred Long Run Day</span>
+                <span id="preferred-long-run-day">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Preferred Workout Day</span>
+                <span id="preferred-workout-day">—</span>
+            </div>
+
+            <div class="account-row">
+                <span>Preferred Rest Day(s)</span>
+                <span id="preferred-rest-day">—</span>
+            </div>
+
         </div>
 
-        <div class="account-row">
-            <span>Preferred Workout Day</span>
-            <span id="preferred-workout-day">—</span>
-        </div>
+        <!-- EDIT MODE -->
 
-        <div class="account-row">
-            <span>Preferred Rest Day(s)</span>
-            <span id="preferred-rest-day">—</span>
+        <div
+            class="account-edit-mode"
+            id="preferences-edit"
+            style="display:none;">
+
+            <label>
+                Preferred Start of Week
+            </label>
+
+            <select id="edit-weekStart">
+
+                <option value="">Select</option>
+                <option value="Monday">Monday</option>
+                <option value="Sunday">Sunday</option>
+
+            </select>
+
+            <label>
+                Preferred Long Run Day
+            </label>
+
+            <select id="edit-preferred-long-run-day">
+
+                <option value="">Select</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+
+            </select>
+
+            <label>
+                Preferred Workout Day
+            </label>
+
+            <select id="edit-preferred-workout-day">
+
+                <option value="">Select</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+
+            </select>
+
+            <label>
+                Preferred Rest Day
+            </label>
+
+            <select id="edit-preferred-rest-day">
+
+                <option value="">Select</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+                <option>None</option>
+
+            </select>
+
         </div>
 
     </div>

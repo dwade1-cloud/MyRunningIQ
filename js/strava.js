@@ -1,4 +1,5 @@
 import { auth } from "./firebase.js";
+import { saveTutorialData } from "./tutorial-data.js";
 
 import {
     onAuthStateChanged
@@ -12,7 +13,9 @@ onAuthStateChanged(auth, (user) => {
 
 const connectButton = document.getElementById("connect-strava");
 
-connectButton.addEventListener("click", () => {
+connectButton.addEventListener("click", async () => {
+
+    await saveTutorialData();
 
     const clientId = "268391";
 

@@ -1,8 +1,13 @@
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
     createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+    doc,
+    setDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const form =
     document.getElementById("signup-form");
@@ -55,10 +60,18 @@ form.addEventListener("submit", async (e) => {
     }
 
     try {
-        await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
+        const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+        await setDoc(
+            doc(db, "users", userCredential.user.uid),
+            {
+                memberSince: new Date().toISOString()
+            }
         );
 
         window.location.href =

@@ -40,75 +40,81 @@
     </div>
 
     <!-- STEP 2 -->
-
     <div class="tutorial-page">
-
         <h1 class="tutorial-title">
             Tell Us About Yourself
         </h1>
 
         <label class="tutorial-label">Full Name</label>
-        
         <input
             type="text"
-            oninput="validateName(this)"
-            class="tutorial-input required-field"
             id="fullName"
+            class="tutorial-input required-field"
             placeholder="John Doe"
             maxlength="30"
             pattern="[A-Za-z ]+"
             title="Name can only contain letters and spaces."
+            oninput="validateName(this)"
             required
         >
 
-        <label class="tutorial-label">Age</label>
+        <label class="tutorial-label">Date of Birth</label>
         <input
-            type="number"
-            oninput="limitNumber(this, 3, 120)"
+            type="date"
+            id="birthday"
             class="tutorial-input required-field"
-            onkeydown="onlyWholeNumbers(event)"
-            id="age"
-            placeholder="17"
             required
         >
 
         <label class="tutorial-label">Height (ft / in)</label>
-
         <div class="tutorial-height-row">
-
             <input
                 type="number"
-                oninput="limitNumber(this, 1, 7)"
-                class="tutorial-input required-field"
-                onkeydown="onlyWholeNumbers(event)"
                 id="heightFeet"
+                class="tutorial-input required-field"
                 placeholder="Feet"
+                oninput="limitNumber(this,1,7)"
+                onkeydown="onlyWholeNumbers(event)"
                 required
             >
-
             <input
                 type="number"
-                oninput="limitNumber(this, 2, 11)"
-                class="tutorial-input required-field"
-                onkeydown="onlyWholeNumbers(event)"
                 id="heightInches"
+                class="tutorial-input required-field"
                 placeholder="Inches"
+                oninput="limitNumber(this,2,11)"
+                onkeydown="onlyWholeNumbers(event)"
                 required
             >
-
         </div>
 
-        <label class="tutorial-label">Weight (lbs) (Optional)</label>
+        <div class="tutorial-height-row">
+            <div style="flex:1;">
+                <label class="tutorial-label">Weight (lbs)</label>
+                <input
+                    type="number"
+                    id="weight"
+                    class="tutorial-input required-field"
+                    placeholder="150"
+                    oninput="limitNumber(this,3,500)"
+                    onkeydown="onlyWholeNumbers(event)"
+                    required
+                >
+            </div>
 
-        <input
-            type="number"
-            oninput="limitNumber(this, 3, 500)"
-            class="tutorial-input"
-            id="weight"
-            placeholder="150"
-            onkeydown="onlyWholeNumbers(event)"
-        >
-
+            <div style="flex:1;">
+                <label class="tutorial-label">Sex</label>
+                <select
+                    id="sex"
+                    class="tutorial-input required-field"
+                    required
+                >
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <!-- STEP 3 -->
@@ -124,127 +130,122 @@
         </label>
         <input
             type="number"
-            oninput="limitNumber(this, 3, 120)"
+            id="yearsRunning"
             class="tutorial-input required-field"
             placeholder="3"
+            oninput="limitNumber(this,1,90)"
             onkeydown="onlyWholeNumbers(event)"
             required
         >
 
         <label class="tutorial-label">
-            Current Weekly Mileage
+            Primary Event
         </label>
+        <select
+            id="primaryEvent"
+            class="tutorial-input required-field"
+            required
+        >
+            <option value="" selected disabled>Select Distance</option>
+            <option>100m</option>
+            <option>200m</option>
+            <option>400m</option>
+            <option>600m</option>
+            <option>800m</option>
+            <option>1500m</option>
+            <option>1600m</option>
+            <option>3000m</option>
+            <option>1 Mile</option>
+            <option>5K</option>
+            <option>10K</option>
+            <option>15K</option>
+            <option>10 Miles</option>
+            <option>20K</option>
+            <option>Half Marathon</option>
+            <option>Marathon</option>
+            <option>50K</option>
+            <option>50 Miles</option>
+            <option>100K</option>
+            <option>100 Miles</option>
+            <option>Other</option>
+        </select>
+
+         <label class="tutorial-label">Current VO₂ Max</label>
         <input
             type="number"
-            oninput="limitNumber(this, 3, 400)"
-            class="tutorial-input required-field"
-            placeholder="35"
+            id="vo2Max"
+            class="tutorial-input"
+            placeholder="54"
+            oninput="limitNumber(this,5,101)"
             onkeydown="onlyWholeNumbers(event)"
-            required
         >
-
-        <label class="tutorial-label">
-            Primary Race Distance
-        </label>
-        <select class="tutorial-input required-field" required>
-            <option value="" selected disabled>Select Distance</option>
-            <option>100m</option>
-            <option>200m</option>
-            <option>400m</option>
-            <option>600m</option>
-            <option>800m</option>
-            <option>1500m</option>
-            <option>1600m</option>
-            <option>3000m</option>
-            <option>1 Mile</option>
-            <option>5K</option>
-            <option>10K</option>
-            <option>15K</option>
-            <option>10 Miles</option>
-            <option>20K</option>
-            <option>Half Marathon</option>
-            <option>Marathon</option>
-            <option>50K</option>
-            <option>50 Miles</option>
-            <option>100K</option>
-            <option>100 Miles</option>
-            <option>Other</option>
-        </select>
-
     </div>
 
-    <!-- STEP 4 -->
-
+   <!-- STEP 4 -->
     <div class="tutorial-page">
-
         <h1 class="tutorial-title">
-            Set Your Goals
+            Preferences
         </h1>
 
-        <label class="tutorial-label">
-            Main Goal
-        </label>
-
-        <select class="tutorial-input required-field">
-            <option value="">Select Your Main Goal</option>
-            <option>Improve Race Times</option>
-            <option>Increase Weekly Mileage</option>
-            <option>Build Endurance</option>
-            <option>Stay Healthy & Injury Free</option>
-            <option>Train for My First Race</option>
-            <option>General Fitness</option>
+        <label class="tutorial-label">Preferred Start of Week</label>
+        <select
+            id="weekStart"
+            class="tutorial-input required-field"
+            required
+        >
+            <option value="">Select</option>
+            <option value="Monday">Monday</option>
+            <option value="Sunday">Sunday</option>
         </select>
 
-        <label class="tutorial-label">
-            Goal Race (Optional)
-        </label>
-        <select class="tutorial-input required-field">
-            <option value="" selected disabled>Select Distance</option>
-            <option>100m</option>
-            <option>200m</option>
-            <option>400m</option>
-            <option>600m</option>
-            <option>800m</option>
-            <option>1500m</option>
-            <option>1600m</option>
-            <option>3000m</option>
-            <option>1 Mile</option>
-            <option>5K</option>
-            <option>10K</option>
-            <option>15K</option>
-            <option>10 Miles</option>
-            <option>20K</option>
-            <option>Half Marathon</option>
-            <option>Marathon</option>
-            <option>50K</option>
-            <option>50 Miles</option>
-            <option>100K</option>
-            <option>100 Miles</option>
-            <option>Other</option>
+        <label class="tutorial-label">Preferred Long Run Day</label>
+        <select
+            id="preferredLongRunDay"
+            class="tutorial-input required-field"
+            required
+        >
+            <option value="">Select</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
         </select>
 
-        <label class="tutorial-label">
-            Goal Time (Optional)
-        </label>
-
-        <input
-            type="text"
-            class="tutorial-input"
-            placeholder="day : hr: min :sec"
-            oninput="formatGoalTime(this)"
-            onblur="normalizeGoalTime(this)"
+        <label class="tutorial-label">Preferred Workout Day</label>
+        <select
+            id="preferredWorkoutDay"
+            class="tutorial-input required-field"
+            required
         >
+            <option value="">Select</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+        </select>
 
-        <label class="tutorial-label">
-            Goal Race Date (Optional)
-        </label>
-
-        <input
-            type="date"
-            id="goalDate"
-            class="tutorial-input"
+        <label class="tutorial-label">Preferred Rest Day</label>
+        <select
+            id="preferredRestDay"
+            class="tutorial-input required-field"
+            required
         >
-
+            <option value="">Select</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+            <option>None</option>
+        </select>
     </div>
 
     <!-- STEP 5 -->
@@ -287,292 +288,7 @@
     </div>
 
 </div>
-
-<script>
-
-const pages = document.querySelectorAll(".tutorial-page");
-
-const progress = document.getElementById("progress-fill");
-
-const stepText = document.getElementById("step-text");
-
-const backBtn = document.getElementById("backBtn");
-
-const nextBtn = document.getElementById("nextBtn");
-
-const goalDate = document.getElementById("goalDate");
-
-const today = new Date().toISOString().split("T")[0];
-
-goalDate.min = today;
-
-let current = 0;
-
-function validateCurrentPage(){
-
-    if(current === 0 || current === 4){
-        nextBtn.disabled = false;
-        return;
-    }
-
-    const activePage = pages[current];
-    const requiredFields = activePage.querySelectorAll(".required-field");
-
-    let valid = true;
-
-    requiredFields.forEach(field=>{
-
-        let fieldValid = true;
-
-        if(field.tagName === "SELECT"){
-
-            fieldValid = field.value !== "";
-
-        }else{
-
-            fieldValid = field.checkValidity();
-
-        }
-
-        if (field.value.trim() === "") {
-
-            field.classList.remove("invalid");
-            valid = false;
-
-        } else if (fieldValid) {
-
-            field.classList.remove("invalid");
-
-        } else {
-
-            field.classList.add("invalid");
-            valid = false;
-
-        }
-
-    });
-
-    nextBtn.disabled = false;
-
-}
-
-function limitNumber(input, maxDigits, maxValue) {
-    if (input.value.length > maxDigits) {
-        input.value = input.value.slice(0, maxDigits);
-    }
-
-    if (Number(input.value) > maxValue) {
-        input.value = maxValue;
-    }
-}
-
-function onlyWholeNumbers(event) {
-    if (['e', 'E', '+', '-', '.'].includes(event.key)) {
-        event.preventDefault();
-    }
-}
-
-function formatGoalTime(input) {
-
-    let digits = input.value.replace(/\D/g, "");
-
-    // Maximum of 7 digits (DHHMMSS)
-    digits = digits.slice(0, 7);
-
-    let formatted = "";
-
-    switch (digits.length) {
-
-        case 0:
-        case 1:
-        case 2:
-            // SS
-            formatted = digits;
-            break;
-
-        case 3:
-        case 4:
-            // M:SS
-            formatted =
-                digits.slice(0, digits.length - 2) +
-                ":" +
-                digits.slice(-2);
-            break;
-
-        case 5:
-        case 6:
-            // H:MM:SS
-            formatted =
-                digits.slice(0, digits.length - 4) +
-                ":" +
-                digits.slice(-4, -2) +
-                ":" +
-                digits.slice(-2);
-            break;
-
-        case 7:
-            // D:HH:MM:SS
-            formatted =
-                digits.slice(0, 1) +
-                ":" +
-                digits.slice(1, 3) +
-                ":" +
-                digits.slice(3, 5) +
-                ":" +
-                digits.slice(5, 7);
-            break;
-    }
-
-    input.value = formatted;
-}
-
-function normalizeGoalTime(input) {
-
-    if (input.value.trim() === "") return;
-
-    let parts = input.value.split(":").map(Number);
-
-    let days = 0;
-    let hours = 0;
-    let minutes = 0;
-    let seconds = 0;
-
-    if (parts.length === 1) {
-
-        seconds = parts[0];
-
-    } else if (parts.length === 2) {
-
-        minutes = parts[0];
-        seconds = parts[1];
-
-    } else if (parts.length === 3) {
-
-        hours = parts[0];
-        minutes = parts[1];
-        seconds = parts[2];
-
-    } else if (parts.length === 4) {
-
-        days = parts[0];
-        hours = parts[1];
-        minutes = parts[2];
-        seconds = parts[3];
-
-    }
-
-    // Carry seconds into minutes
-    minutes += Math.floor(seconds / 60);
-    seconds = seconds % 60;
-
-    // Carry minutes into hours
-    hours += Math.floor(minutes / 60);
-    minutes = minutes % 60;
-
-    // Carry hours into days
-    days += Math.floor(hours / 24);
-    hours = hours % 24;
-
-    // Maximum 5 days
-    if (days > 5) {
-        days = 5;
-    }
-
-    // Format output
-    if (days > 0) {
-
-        input.value =
-            `${days}:${String(hours).padStart(2,"0")}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-    } else if (hours > 0) {
-
-        input.value =
-            `${hours}:${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-    } else if (minutes > 0) {
-
-        input.value =
-            `${minutes}:${String(seconds).padStart(2,"0")}`;
-
-    } else {
-
-        input.value = `${seconds}`;
-
-    }
-
-}
-
-function validateName(input) {
-
-    // Allow only letters and spaces
-    input.value = input.value.replace(/[^a-zA-Z ]/g, "");
-
-    // Remove multiple spaces
-    input.value = input.value.replace(/\s{2,}/g, " ");
-
-    // Limit to 30 characters
-    input.value = input.value.slice(0, 30);
-
-}
-
-function updateTutorial(){
-    pages.forEach(page => page.classList.remove("active"));
-    pages[current].classList.add("active");
-
-    progress.style.width = ((current+1)/5)*100 + "%";
-
-    stepText.innerHTML = `Step ${current+1} of 5`;
-
-    backBtn.style.visibility = current===0 ? "hidden" : "visible";
-
-    if(current===4){
-        nextBtn.innerHTML = "Finish Setup";
-    }else{
-        nextBtn.innerHTML = "Next →";
-    }
-
-    validateCurrentPage();
-}
-
-document.querySelectorAll(".required-field").forEach(field=>{
-
-    field.addEventListener("input", validateCurrentPage);
-    field.addEventListener("change", validateCurrentPage);
-
-});
-
-nextBtn.addEventListener("click",()=>{
-
-    if(current<4){
-
-        current++;
-
-        updateTutorial();
-
-    }else{
-
-        window.location.href="dashboard.html";
-
-    }
-
-});
-
-backBtn.addEventListener("click",()=>{
-
-    if(current>0){
-
-        current--;
-
-        updateTutorial();
-
-    }
-
-});
-
-updateTutorial();
-
-</script>
-
+<script type="module" src="js/tutorial.js"></script>
 <script type="module" src="js/strava.js"></script>
 </body>
 </html>

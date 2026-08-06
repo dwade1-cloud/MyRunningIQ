@@ -1,17 +1,16 @@
 /* #region Header */
 
 .topbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
+    position:fixed;
+    width:100%;
+    z-index:5000;
 
     display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
+    grid-template-columns:160px 1fr 57px;
+    align-items:start;
 
     height:72px;
     padding:0 30px;
-
     background:#fff;
     border-bottom:1px solid #e8e8e8;
 }
@@ -27,8 +26,8 @@
 .topbar-logo{
     height:auto;
     margin-left:-65px;
-    margin-top:-55px;
-    width:300px;
+    margin-top:-48px;
+    width:270px;
     display:block;
 }
 
@@ -39,6 +38,7 @@
     justify-content:center;
     align-items:center;
     gap:40px;
+    padding-top:20px;
 }
 
 .topbar-link{
@@ -65,7 +65,9 @@
 .topbar-right{
     display:flex;
     justify-content:flex-end;
+    align-items:center;
     position:relative;
+    padding-top:20px;
 }
 
 .account-menu-button{
@@ -73,7 +75,7 @@
     align-items:center;
     gap:10px;
 
-    margin-left:20px;
+    margin-right:-9px;
 
     border:none;
     border-radius:10px;
@@ -105,19 +107,15 @@
 
 .account-dropdown{
     position:absolute;
-    top:115%;
+    top:calc(100% + 10px);
     right:0;
 
     width:220px;
 
     background:#fff;
-
     border:1px solid #e5e5e5;
     border-radius:12px;
-
     box-shadow:0 10px 30px rgba(0,0,0,.12);
-
-    overflow:hidden;
 
     display:none;
 }

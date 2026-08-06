@@ -1,62 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Account | MyRunningIQ</title>
-<link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Account | MyRunningIQ</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="components/header.css">
 </head>
 
 <body class="dashboard-body">
 
-<button class="sidebar-toggle" id="sidebar-toggle">
-    <svg class="sidebar-toggle-icon" width="14" height="14" viewBox="0 0 24 24">
-        <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-</button>
-
-<div class="sidebar" id="sidebar">
-
-    <div class="sidebar-logo-section">
-        <img src="images/LogoBlack.png" class="sidebar-logo" alt="MyRunningIQ">
-    </div>
-
-    <nav class="sidebar-nav">
-        <a href="dashboard.html" class="sidebar-link">
-            <span class="sidebar-icon">🏠</span>
-            <span class="sidebar-text">Dashboard</span>
-        </a>
-
-        <a href="calendar.html" class="sidebar-link">
-            <span class="sidebar-icon">📅</span>
-            <span class="sidebar-text">Calendar</span>
-        </a>
-
-        <a href="coach.html" class="sidebar-link">
-            <span class="sidebar-icon">🤖</span>
-            <span class="sidebar-text">AI Coach</span>
-        </a>
-    </nav>
-
-    <div class="sidebar-spacer"></div>
-
-    <div class="sidebar-account">
-        <a href="account.html" class="sidebar-link sidebar-small active">
-            <span class="sidebar-icon">👤</span>
-            <span class="sidebar-text">Account</span>
-        </a>
-
-        <a href="settings.html" class="sidebar-link sidebar-small">
-            <span class="sidebar-icon">⚙️</span>
-            <span class="sidebar-text">Settings</span>
-        </a>
-    </div>
-
-    <div class="sidebar-footer">
-        <p class="sidebar-version">Version 1.0</p>
-    </div>
-
-</div>
+<div id="header-container"></div>
 
 <main class="dashboard-main" id="dashboard-main">
 
@@ -874,8 +828,7 @@
 
 </main>
 
-<script src="js/sidebar.js"></script>
+<script type="module" src="components/header-loader.js"></script>
 <script type="module" src="js/account.js"></script>
-
 </body>
 </html>

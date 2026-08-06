@@ -1,3 +1,9 @@
+import { auth } from "../js/firebase.js";
+
+import {
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 export function initializeHeader() {
 
     /* ACCOUNT DROPDOWN */
@@ -25,6 +31,32 @@ export function initializeHeader() {
 
     }
 
+    /* SIGN OUT */
+
+    const signOutButton =
+        document.getElementById("sign-out-button");
+
+    if (signOutButton) {
+
+        signOutButton.addEventListener("click", async () => {
+
+            try {
+
+                await signOut(auth);
+
+                window.location.href = "login.html";
+
+            } catch (error) {
+
+                console.error(error);
+                alert("Unable to sign out.");
+
+            }
+
+        });
+
+    }
+
     /* ACTIVE PAGE */
 
     const currentPage =
@@ -33,6 +65,8 @@ export function initializeHeader() {
     document
         .querySelectorAll(".topbar-link")
         .forEach(link => {
+
+            link.classList.remove("active");
 
             if (link.getAttribute("href") === currentPage) {
                 link.classList.add("active");

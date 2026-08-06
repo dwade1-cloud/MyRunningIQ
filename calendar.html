@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Calendar | MyRunningIQ</title>
+    <link rel="stylesheet" href="components/header.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="calendar-page">
+    
+    <!-- HEADER -->
+    <div id="header-container"></div>
+
+    <main class="calendar-main">
+
+        <!-- ======================================================
+             PAGE HEADER
+        ======================================================= -->
+
+        <section class="calendar-header">
+
+            <div>
+
+                <p class="calendar-eyebrow">
+                    TRAINING PLANNER
+                </p>
+
+                <h1>
+                    Calendar
+                </h1>
+
+                <p class="calendar-subtitle">
+                    Organize your training, races, life schedule, and weather in one place.
+                </p>
+
+            </div>
+
+            <div class="calendar-header-buttons">
+
+                <button
+                    class="calendar-button"
+                    id="today-button"
+                >
+                    Today
+                </button>
+
+                <button
+                    class="orange-button"
+                    id="add-event-button"
+                >
+                    + Add Event
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             WEEK SUMMARY
+        ======================================================= -->
+
+        <section class="calendar-week-summary">
+
+            <div class="summary-card">
+
+                <p class="summary-label">
+                    Weekly Mileage
+                </p>
+
+                <h2 id="summary-mileage">
+                    34.2 mi
+                </h2>
+
+            </div>
+
+            <div class="summary-card">
+
+                <p class="summary-label">
+                    Planned Runs
+                </p>
+
+                <h2 id="summary-runs">
+                    6
+                </h2>
+
+            </div>
+
+            <div class="summary-card">
+
+                <p class="summary-label">
+                    Hard Sessions
+                </p>
+
+                <h2 id="summary-workouts">
+                    2
+                </h2>
+
+            </div>
+
+            <div class="summary-card">
+
+                <p class="summary-label">
+                    Race Days
+                </p>
+
+                <h2 id="summary-races">
+                    1
+                </h2>
+
+            </div>
+
+            <div class="summary-card">
+
+                <p class="summary-label">
+                    Avg High
+                </p>
+
+                <h2 id="summary-weather">
+                    78°
+                </h2>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             CALENDAR TOOLBAR
+        ======================================================= -->
+
+        <section class="calendar-toolbar">
+
+            <div class="calendar-navigation">
+
+                <button
+                    class="calendar-arrow"
+                    id="previous-month"
+                >
+                    ←
+                </button>
+
+                <h2 id="calendar-month">
+                    September 2026
+                </h2>
+
+                <button
+                    class="calendar-arrow"
+                    id="next-month"
+                >
+                    →
+                </button>
+
+            </div>
+
+            <div class="calendar-view-buttons">
+
+                <button class="calendar-view active">
+                    Month
+                </button>
+
+                <button class="calendar-view">
+                    Week
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             CALENDAR
+        ======================================================= -->
+
+        <section class="calendar-container">
+
+            <!-- DAY HEADERS -->
+
+            <div class="calendar-days">
+
+                <div>Monday</div>
+                <div>Tuesday</div>
+                <div>Wednesday</div>
+                <div>Thursday</div>
+                <div>Friday</div>
+                <div>Saturday</div>
+                <div>Sunday</div>
+
+            </div>
+
+
+            <!-- CALENDAR GRID -->
+
+            <div
+                class="calendar-grid"
+                id="calendar-grid"
+            >
+
+                <!-- DAY -->
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            1
+                        </span>
+
+                        <span class="weather-icon">
+                            ☀️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event easy-run">
+                            Easy Run
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            2
+                        </span>
+
+                        <span class="weather-icon">
+                            🌤️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event workout">
+                            Workout
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            3
+                        </span>
+
+                        <span class="weather-icon">
+                            🌧️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event strength">
+                            Strength
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            4
+                        </span>
+
+                        <span class="weather-icon">
+                            ☀️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event long-run">
+                            Long Run
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            5
+                        </span>
+
+                        <span class="weather-icon">
+                            ☁️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event rest-day">
+                            Rest Day
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            6
+                        </span>
+
+                        <span class="weather-icon">
+                            🌦️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event race">
+                            Race
+                        </div>
+
+                    </div>
+
+                </button>
+
+
+
+                <button class="calendar-day">
+
+                    <div class="calendar-day-header">
+
+                        <span class="calendar-date">
+                            7
+                        </span>
+
+                        <span class="weather-icon">
+                            🌩️
+                        </span>
+
+                    </div>
+
+                    <div class="calendar-events">
+
+                        <div class="event easy-run">
+                            Easy Run
+                        </div>
+
+                    </div>
+
+                </button>
+
+                <!-- JS will generate the remaining days -->
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ======================================================
+             COLOR LEGEND
+        ======================================================= -->
+
+        <section class="calendar-legend">
+
+            <div class="legend-item">
+                <span class="legend easy-run"></span>
+                Easy Run
+            </div>
+
+            <div class="legend-item">
+                <span class="legend workout"></span>
+                Workout
+            </div>
+
+            <div class="legend-item">
+                <span class="legend long-run"></span>
+                Long Run
+            </div>
+
+            <div class="legend-item">
+                <span class="legend race"></span>
+                Race
+            </div>
+
+            <div class="legend-item">
+                <span class="legend recovery"></span>
+                Recovery
+            </div>
+
+            <div class="legend-item">
+                <span class="legend strength"></span>
+                Strength
+            </div>
+
+            <div class="legend-item">
+                <span class="legend cross"></span>
+                Cross Train
+            </div>
+
+            <div class="legend-item">
+                <span class="legend rest-day"></span>
+                Rest Day
+            </div>
+
+        </section>
+
+    </main>
+
+<script type="module" src="components/header-loader.js"></script>    
+</body>
+</html>
+
+<!-- ======================================================
+     DAY DETAILS PANEL
+======================================================= -->
+
+<aside
+    class="day-panel"
+    id="day-panel"
+>
+
+    <!-- HEADER -->
+
+    <div class="day-panel-header">
+
+        <div>
+
+            <p class="calendar-eyebrow">
+                SELECTED DAY
+            </p>
+
+            <h2 id="selected-date">
+                Tuesday, September 22
+            </h2>
+
+        </div>
+
+        <button
+            class="close-day-panel"
+            id="close-day-panel"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+
+    <!-- ======================================================
+         WEATHER
+    ======================================================= -->
+
+    <section class="day-weather">
+
+        <div class="panel-section-header">
+
+            <h3>
+                Weather
+            </h3>
+
+            <span id="weather-summary">
+                High 79° • Low 61°
+            </span>
+
+        </div>
+
+        <div class="weather-grid">
+
+            <div class="weather-card">
+
+                <h4>
+                    Morning
+                </h4>
+
+                <div class="weather-icon-large">
+                    ☀️
+                </div>
+
+                <p>
+                    Sunny
+                </p>
+
+                <strong>
+                    66°
+                </strong>
+
+            </div>
+
+            <div class="weather-card">
+
+                <h4>
+                    Afternoon
+                </h4>
+
+                <div class="weather-icon-large">
+                    🌦️
+                </div>
+
+                <p>
+                    Showers
+                </p>
+
+                <strong>
+                    79°
+                </strong>
+
+            </div>
+
+            <div class="weather-card">
+
+                <h4>
+                    Evening
+                </h4>
+
+                <div class="weather-icon-large">
+                    🌩️
+                </div>
+
+                <p>
+                    Storms
+                </p>
+
+                <strong>
+                    70°
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="weather-extra">
+
+            <div>
+
+                <span>
+                    Rain Chance
+                </span>
+
+                <strong>
+                    70%
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Wind
+                </span>
+
+                <strong>
+                    12 mph
+                </strong>
+
+            </div>
+
+            <div>
+
+                <span>
+                    Humidity
+                </span>
+
+                <strong>
+                    63%
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         AI WEATHER ADVICE
+    ======================================================= -->
+
+    <section class="ai-weather-card">
+
+        <div class="ai-icon">
+
+            🤖
+
+        </div>
+
+        <div>
+
+            <h3>
+                AI Recommendation
+            </h3>
+
+            <p id="weather-advice">
+
+                Afternoon thunderstorms are expected.
+                Consider moving today's workout to the morning.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         DAILY SCHEDULE
+    ======================================================= -->
+
+    <section class="day-events">
+
+        <div class="panel-section-header">
+
+            <h3>
+
+                Schedule
+
+            </h3>
+
+            <button
+                class="text-button"
+                id="add-day-event"
+            >
+
+                + Add Event
+
+            </button>
+
+        </div>
+
+
+
+        <!-- EVENT -->
+
+        <div class="day-event easy-run">
+
+            <div>
+
+                <strong>
+
+                    Easy Run
+
+                </strong>
+
+                <p>
+
+                    5 Miles
+
+                </p>
+
+            </div>
+
+            <span>
+
+                7:00 AM
+
+            </span>
+
+        </div>
+
+
+
+        <div class="day-event strength">
+
+            <div>
+
+                <strong>
+
+                    Strength
+
+                </strong>
+
+                <p>
+
+                    Upper Body
+
+                </p>
+
+            </div>
+
+            <span>
+
+                4:30 PM
+
+            </span>
+
+        </div>
+
+
+
+        <div class="day-event personal">
+
+            <div>
+
+                <strong>
+
+                    School
+
+                </strong>
+
+                <p>
+
+                    Classes
+
+                </p>
+
+            </div>
+
+            <span>
+
+                8:00 AM
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         DAILY NOTES
+    ======================================================= -->
+
+    <section class="day-notes">
+
+        <div class="panel-section-header">
+
+            <h3>
+
+                Notes
+
+            </h3>
+
+        </div>
+
+        <textarea
+
+            id="daily-note"
+
+            placeholder="Add anything important for today..."
+
+        ></textarea>
+
+    </section>
+
+
+
+    <!-- ======================================================
+         QUICK ACTIONS
+    ======================================================= -->
+
+    <section class="day-actions">
+
+        <button
+
+            class="orange-button"
+
+            id="save-day"
+
+        >
+
+            Save Changes
+
+        </button>
+
+        <button
+
+            class="calendar-button"
+
+            id="delete-day"
+
+        >
+
+            Delete Events
+
+        </button>
+
+    </section>
+
+</aside>
+
+<!-- ======================================================
+     ADD EVENT MODAL
+======================================================= -->
+
+<div
+    class="calendar-modal-overlay"
+    id="calendar-modal"
+>
+
+    <div class="calendar-modal">
+
+        <!-- HEADER -->
+
+        <div class="calendar-modal-header">
+
+            <div>
+
+                <p class="calendar-eyebrow">
+                    TRAINING PLANNER
+                </p>
+
+                <h2>
+                    Add Event
+                </h2>
+
+            </div>
+
+            <button
+                id="close-modal"
+                class="close-modal"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <!-- ======================================================
+             EVENT TYPE
+        ======================================================= -->
+
+        <section class="event-section">
+
+            <h3>
+                Choose Event Type
+            </h3>
+
+            <div class="event-type-grid">
+
+                <button class="event-type easy-run">
+                    🟢
+                    <span>Easy Run</span>
+                </button>
+
+                <button class="event-type workout">
+                    🟠
+                    <span>Workout</span>
+                </button>
+
+                <button class="event-type long-run">
+                    🔵
+                    <span>Long Run</span>
+                </button>
+
+                <button class="event-type race">
+                    🔴
+                    <span>Race</span>
+                </button>
+
+                <button class="event-type recovery">
+                    🟩
+                    <span>Recovery Run</span>
+                </button>
+
+                <button class="event-type strength">
+                    🏋️
+                    <span>Strength</span>
+                </button>
+
+                <button class="event-type cross">
+                    🚴
+                    <span>Cross Training</span>
+                </button>
+
+                <button class="event-type rest">
+                    ⚫
+                    <span>Rest Day</span>
+                </button>
+
+                <button class="event-type school">
+                    🎒
+                    <span>School</span>
+                </button>
+
+                <button class="event-type work">
+                    💼
+                    <span>Work</span>
+                </button>
+
+                <button class="event-type travel">
+                    ✈️
+                    <span>Travel</span>
+                </button>
+
+                <button class="event-type appointment">
+                    📅
+                    <span>Appointment</span>
+                </button>
+
+                <button class="event-type other">
+                    📌
+                    <span>Other</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             EVENT DETAILS
+        ======================================================= -->
+
+        <section class="event-section">
+
+            <h3>
+                Event Details
+            </h3>
+
+            <div class="event-grid">
+
+                <div>
+
+                    <label>
+                        Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="event-title"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="event-date"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="event-start"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        End Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="event-end"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             TRAINING DETAILS
+        ======================================================= -->
+
+        <section
+            class="event-section"
+            id="training-fields"
+        >
+
+            <h3>
+                Training Details
+            </h3>
+
+            <div class="event-grid">
+
+                <div>
+
+                    <label>
+                        Planned Distance
+                    </label>
+
+                    <input
+                        type="number"
+                        id="planned-distance"
+                        step=".1"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        Target Pace
+                    </label>
+
+                    <input
+                        type="text"
+                        id="planned-pace"
+                        placeholder="7:15 / mi"
+                    >
+
+                </div>
+
+                <div>
+
+                    <label>
+                        Workout Focus
+                    </label>
+
+                    <select id="workout-focus">
+
+                        <option>
+                            Aerobic
+                        </option>
+
+                        <option>
+                            Threshold
+                        </option>
+
+                        <option>
+                            VO₂ Max
+                        </option>
+
+                        <option>
+                            Hills
+                        </option>
+
+                        <option>
+                            Speed
+                        </option>
+
+                        <option>
+                            Race Pace
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             LOCATION
+        ======================================================= -->
+
+        <section class="event-section">
+
+            <label>
+
+                Location
+
+            </label>
+
+            <input
+                type="text"
+                id="event-location"
+                placeholder="Track, Trail, School..."
+            >
+
+        </section>
+
+
+        <!-- ======================================================
+             NOTES
+        ======================================================= -->
+
+        <section class="event-section">
+
+            <label>
+
+                Notes
+
+            </label>
+
+            <textarea
+                id="event-notes"
+                maxlength="300"
+                placeholder="Optional..."
+            ></textarea>
+
+        </section>
+
+
+        <!-- ======================================================
+             FUTURE AI
+        ======================================================= -->
+
+        <section class="ai-preview-card">
+
+            <div class="ai-preview-icon">
+
+                🤖
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    AI Planning
+
+                </h3>
+
+                <p>
+
+                    MyRunningIQ AI will use this event when building future training plans, adjusting workouts, planning tapers, scheduling recovery, and recommending the best time to run based on weather.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================================
+             BUTTONS
+        ======================================================= -->
+
+        <div class="calendar-modal-buttons">
+
+            <button
+                class="calendar-button"
+                id="cancel-event"
+            >
+
+                Cancel
+
+            </button>
+
+            <button
+                class="orange-button"
+                id="save-event"
+            >
+
+                Save Event
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>

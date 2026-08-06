@@ -1,0 +1,181 @@
+/* #region Header */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+
+    height:72px;
+    padding:0 30px;
+
+    background:#fff;
+    border-bottom:1px solid #e8e8e8;
+}
+
+/* ---------- Logo ---------- */
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+}
+
+.topbar-logo{
+    height:auto;
+    margin-left:-65px;
+    margin-top:-55px;
+    width:300px;
+    display:block;
+}
+
+/* ---------- Navigation ---------- */
+
+.topbar-nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+}
+
+.topbar-link{
+    text-decoration:none;
+    color:#555;
+    font-size:15px;
+    font-weight:600;
+    transition:.2s;
+    padding:6px 0;
+    border-bottom:2px solid transparent;
+}
+
+.topbar-link:hover{
+    color:#f47b20;
+}
+
+.topbar-link.active{
+    color:#f47b20;
+    border-bottom-color:#f47b20;
+}
+
+/* ---------- Account ---------- */
+
+.topbar-right{
+    display:flex;
+    justify-content:flex-end;
+    position:relative;
+}
+
+.account-menu-button{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-left:20px;
+
+    border:none;
+    border-radius:10px;
+
+    background:transparent;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.account-menu-button:hover{
+    background:#f5f5f5;
+}
+
+.account-avatar{
+    font-size:20px;
+}
+
+.account-name{
+    font-weight:600;
+    color:#333;
+}
+
+.dropdown-arrow{
+    font-size:12px;
+    color:#666;
+}
+
+/* ---------- Dropdown ---------- */
+
+.account-dropdown{
+    position:absolute;
+    top:115%;
+    right:0;
+
+    width:220px;
+
+    background:#fff;
+
+    border:1px solid #e5e5e5;
+    border-radius:12px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+    display:none;
+}
+
+.account-dropdown.open{
+    display:block;
+}
+
+.account-dropdown a,
+.account-dropdown button{
+
+    width:100%;
+
+    display:block;
+
+    padding:14px 18px;
+
+    background:none;
+    border:none;
+
+    text-align:left;
+
+    text-decoration:none;
+
+    color:#333;
+
+    font-size:14px;
+
+    cursor:pointer;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover{
+    background:#f7f7f7;
+}
+
+.dropdown-signout{
+    border-top:1px solid #ececec !important;
+    color:#d53a3a !important;
+    font-weight:600;
+}
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:900px){
+
+    .topbar{
+        padding:0 20px;
+    }
+
+    .topbar-nav{
+        gap:18px;
+    }
+
+    .account-name{
+        display:none;
+    }
+
+}
+
+/* #endregion */
